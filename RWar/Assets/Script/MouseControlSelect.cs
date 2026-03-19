@@ -52,6 +52,12 @@ public class MouseControlSelect : MonoBehaviour
                     }
 
                     //パラメーター　取得
+
+                    charaUI.charaText.text= selectObj.GetComponent<CharaParam>().charaName;
+                    charaUI.hpText.text= selectObj.GetComponent<CharaParam>().hp;
+                    charaUI.atkText.text = selectObj.GetComponent<CharaParam>().atkRank;
+                    charaUI.defText.text = selectObj.GetComponent<CharaParam>().defRank;
+                    charaUI.moveText.text = selectObj.GetComponent<CharaParam>().moveRank;
                 }
             }
             else

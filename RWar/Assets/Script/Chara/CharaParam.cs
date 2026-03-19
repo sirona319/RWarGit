@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 
-public class CharaParam : MonoBehaviour
+public class CharaParam : CharaBase
 {
-    [SerializeField] string charaName;
-    [SerializeField] string atkRank;
-    [SerializeField] string defRank;
-    [SerializeField] string moveRank;
+    public string charaName;
+    public string hp;
+    public string atkRank;
+    public string defRank;
+    public string moveRank;
 
-    [SerializeField] string skill;
+    public string skill;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

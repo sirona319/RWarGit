@@ -9,6 +9,13 @@ public class CharaUI : MonoBehaviour
     public Transform param;
     public Transform paramName;
 
+    public TMP_Text charaText;
+
+    public TMP_Text hpText;
+    public TMP_Text atkText;
+    public TMP_Text defText;
+    public TMP_Text moveText;
+
     public Transform command;
     public Transform commandName;
 
@@ -41,7 +48,7 @@ public class CharaUI : MonoBehaviour
     public void CharaSelectOn()
     {
         //enemyName.gameObject.SetActive(false);
-
+        paramName.GetComponent<Image>().color = new Color(0.5f, 0.5f, 0.7f, 1);
         param.gameObject.SetActive(true);
         paramName.gameObject.SetActive(true);
         command.gameObject.SetActive(true);
@@ -55,16 +62,17 @@ public class CharaUI : MonoBehaviour
         command.gameObject.SetActive(false);
         commandName.gameObject.SetActive(false);
 
-        enemyName.gameObject.SetActive(false);
+        //enemyName.gameObject.SetActive(false);
     }
 
     public void EnemySelectOn()
     {
+        paramName.GetComponent<Image>().color= new Color(0.7f, 0.5f, 0.5f, 1);
         param.gameObject.SetActive(true);
         paramName.gameObject.SetActive(true);
         command.gameObject.SetActive(false);
         commandName.gameObject.SetActive(false);
 
-        enemyName.gameObject.SetActive(true);
+        //enemyName.gameObject.SetActive(true);
     }
 }
