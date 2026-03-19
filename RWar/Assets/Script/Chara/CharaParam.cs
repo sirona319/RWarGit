@@ -21,4 +21,9 @@ public class CharaParam : CharaBase
     {
         
     }
+
+    public void TestBut()
+    {
+        Debug.Log("Test");
+    }
 }

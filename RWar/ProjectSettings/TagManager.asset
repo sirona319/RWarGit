@@ -11,6 +11,7 @@ TagManager:
   - Enemy
   - CharaUI
   - test
+  - MoveErea
   layers:
   - Default
   - TransparentFX

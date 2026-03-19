@@ -13,6 +13,8 @@ public class MouseControlSelect : MonoBehaviour
 
 
     CharaUI charaUI;
+
+    bool isCharaSelect = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -22,52 +24,50 @@ public class MouseControlSelect : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetMouseButtonDown(RIGHT)) isCharaSelect = false;
 
-        SetlectObjMove();
-        if (Input.GetMouseButtonDown(LEFT))
+        if (isCharaSelect) return;
+        if (!Input.GetMouseButtonDown(LEFT)) return;
+        
+
+        selectObj = MyLib.DebugRayViewCameraPosZ();
+
+        var createPos = MyLib.DebugRayViewCameraPosXZ();
+        charaUI.CharaSelectOff();
+
+
+        if (selectObj == null) return;
+        
+
+        if (selectObj.isStatic/*||selectObj.tag=="Untagged"*/)
         {
-            //MyLib.DebugRayViewCameraZ();
+            GameObject.FindGameObjectWithTag("test").transform.position = createPos;//移動用
 
-            selectObj = MyLib.DebugRayViewCameraPosZ();
-
-            var createPos = MyLib.DebugRayViewCameraPosXZ();
-
-            //createPos.y = 0f;
-            if (selectObj!= null )
-            {
-                charaUI.CharaSelectOff();
-
-                if (selectObj.isStatic)
-                {
-                    GameObject.FindGameObjectWithTag("test").transform.position = createPos;//移動用
-
-                    selectObj = null;
-                }
-                else
-                {
-                    charaUI.CharaSelectOn();
-                    if(selectObj.tag == "Enemy")
-                    {
-                        charaUI.EnemySelectOn();
-                    }
-
-                    //パラメーター　取得
-
-                    charaUI.charaText.text= selectObj.GetComponent<CharaParam>().charaName;
-                    charaUI.hpText.text= selectObj.GetComponent<CharaParam>().hp;
-                    charaUI.atkText.text = selectObj.GetComponent<CharaParam>().atkRank;
-                    charaUI.defText.text = selectObj.GetComponent<CharaParam>().defRank;
-                    charaUI.moveText.text = selectObj.GetComponent<CharaParam>().moveRank;
-                }
-            }
-            else
-            {
-                charaUI.CharaSelectOff();
-            }
-
+            selectObj = null;
         }
+        else
+        {
+            if(selectObj.tag == "Enemy")
+            {
+                charaUI.EnemySelectOn();
+            }
+            else if(selectObj.tag == "Chara")
+            {
+                charaUI.CharaSelectOn();
+                isCharaSelect = true;
 
-       
+            }
+
+            //パラメーター　取得
+
+            charaUI.charaText.text = selectObj.GetComponent<CharaParam>().charaName;
+            charaUI.hpText.text= selectObj.GetComponent<CharaParam>().hp;
+            charaUI.atkText.text = selectObj.GetComponent<CharaParam>().atkRank;
+            charaUI.defText.text = selectObj.GetComponent<CharaParam>().defRank;
+            charaUI.moveText.text = selectObj.GetComponent<CharaParam>().moveRank;
+        }
+        
+
     }
 
     void SetlectObjMove()
@@ -75,13 +75,13 @@ public class MouseControlSelect : MonoBehaviour
         if (!Input.GetMouseButton(LEFT)) return;
         if (selectObj == null) return;
 
-        //const float SPEED = 0.4f;
+        const float SPEED = 0.4f;
 
-        ////selectObj.transform.position=
-        //selectObj.transform.position += Camera.main.transform.right * Input.GetAxis("Mouse X") * SPEED +
-        //    Camera.main.transform.up * Input.GetAxis("Mouse Y") * SPEED;
+        //selectObj.transform.position=
+        selectObj.transform.position += Camera.main.transform.right * Input.GetAxis("Mouse X") * SPEED +
+            Camera.main.transform.up * Input.GetAxis("Mouse Y") * SPEED;
 
-        //selectObj.transform.position = MoveLimit(selectObj.transform.position);
+        selectObj.transform.position = MoveLimit(selectObj.transform.position);
     }
 
     Vector3 MoveLimit(Vector3 pos)
