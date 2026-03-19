@@ -42,7 +42,7 @@ public class CursolMgr : Singleton<CursolMgr>
         }
         //m_variableJoystick.gameObject.SetActive(true);
 #elif UNITY_EDITOR_WIN
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
 #endif
     }
 

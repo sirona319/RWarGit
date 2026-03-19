@@ -3,6 +3,22 @@
 public class MEMO : MonoBehaviour
 {
     /*
+    パラメーターなど説明
+    https://x.gd/vUvxo
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     ・パッケージ
     FadeCamera2.unitypackage
         https://x.gd/97tTw

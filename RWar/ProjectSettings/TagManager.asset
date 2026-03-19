@@ -7,6 +7,10 @@ TagManager:
   - Fade
   - EnemyM
   - SoundM
+  - Chara
+  - Enemy
+  - CharaUI
+  - test
   layers:
   - Default
   - TransparentFX
@@ -15,8 +19,8 @@ TagManager:
   - Water
   - UI
   - 
-  - 
-  - 
+  - Mob
+  - Ground
   - 
   - 
   - 

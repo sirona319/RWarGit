@@ -367,6 +367,32 @@ public static class MyLib
         return hitObject;
     }
 
+    //レイの表示Scene右上の球体Gizmob Onにする 座標を返す　オブジェクトがあたっていないときは飛ばした先の座標を返す
+    public static Vector3 DebugRayViewCameraPosXZ(bool DebugDraw = true)
+    {
+        float distance = 1000;   // 飛ばす&表示するRayの長さ
+        float duration = 50; // 表示期間（秒）
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (DebugDraw)
+            Debug.DrawRay(ray.origin, ray.direction * distance, Color.red, duration, false);
+
+        RaycastHit hit = new RaycastHit();
+        GameObject hitObject = null;
+        if (Physics.Raycast(ray, out hit, distance))
+        {
+            hitObject = hit.collider.gameObject;
+
+            if (DebugDraw)
+                Debug.Log(hitObject.name);
+
+            //return hitObject;
+        }
+
+        return new Vector3(hit.point.x, 0f, hit.point.z);
+    }
+
     //メインカメラのZ位置 cameraZ
     //public static GameObject DebugRayViewCameraZ(float cameraZ)
     //{
