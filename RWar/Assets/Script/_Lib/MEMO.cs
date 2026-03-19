@@ -9,6 +9,7 @@ public class MEMO : MonoBehaviour
 
 
 
+        GameObject.FindGameObjectsWithTag("MoveErea").ToList().ForEach(x => x.SetActive(false));
 
 
 

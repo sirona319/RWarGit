@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Linq;
 public class CharaUI : MonoBehaviour
 {
     //statusは状態
@@ -62,6 +63,10 @@ public class CharaUI : MonoBehaviour
         command.gameObject.SetActive(false);
         commandName.gameObject.SetActive(false);
 
+
+        GameObject.FindGameObjectsWithTag("MoveErea").ToList().ForEach(x => x.SetActive(false));
+
+        GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
         //enemyName.gameObject.SetActive(false);
     }
 

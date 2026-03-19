@@ -12,6 +12,7 @@ TagManager:
   - CharaUI
   - test
   - MoveErea
+  - AtkErea
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Mob
   - Ground
   - 
-  - 
+  - Lenge
   - 
   - 
   - 
