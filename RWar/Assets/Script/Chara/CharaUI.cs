@@ -23,29 +23,6 @@ public class CharaUI : MonoBehaviour
 
     public Transform enemyName;
 
-    ////HP
-    //public Image[] lifeImage;
-
-
-
-    ////DEAD
-    //public Transform DeadSprite;
-
-    ////移動させる画像
-    //public Image eyeImageUp;
-    //public Image eyeImageDown;
-    ////
-
-    //public Transform closeEyeImageUp1;
-    //public Transform closeEyeImageDown1;
-    //public Transform closeEyeImageUp2;
-    //public Transform closeEyeImageDown2;
-    //public Transform closeEyeImageUp0;
-    //public Transform closeEyeImageDown0;
-
-    //public Transform EyeObj;
-    //public TextMeshProUGUI reviveText;
-
     public void CharaSelectOn()
     {
         //enemyName.gameObject.SetActive(false);
@@ -54,6 +31,10 @@ public class CharaUI : MonoBehaviour
         paramName.gameObject.SetActive(true);
         command.gameObject.SetActive(true);
         commandName.gameObject.SetActive(true);
+
+        GameObject.FindGameObjectsWithTag("MoveErea").ToList().ForEach(x => x.SetActive(false));
+
+        GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
     }
 
     public void CharaSelectOff()
@@ -79,5 +60,7 @@ public class CharaUI : MonoBehaviour
         commandName.gameObject.SetActive(false);
 
         //enemyName.gameObject.SetActive(true);
+
+
     }
 }

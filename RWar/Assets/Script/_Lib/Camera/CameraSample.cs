@@ -1,9 +1,10 @@
-﻿using DG.Tweening;
+﻿/*
+
+using DG.Tweening;
 using UnityEngine;
 
 
-//https://gomafrontier.com/unity/1585
-public class CameraControl : MonoBehaviour
+public class CameraSample : MonoBehaviour
 {
 
     public bool isEventCamera=false;
@@ -101,3 +102,4 @@ public class CameraControl : MonoBehaviour
     //    }
     //}
 }
+ */

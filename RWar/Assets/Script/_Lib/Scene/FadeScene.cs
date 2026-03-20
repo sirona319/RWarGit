@@ -203,7 +203,7 @@ public class FadeScene : MonoBehaviour
         FadeIn(0, () =>
         {
             GameObject.FindGameObjectWithTag("Player").transform.position = target;
-            Camera.main.GetComponent<CameraControl>().ChangePlayerPos();
+            //Camera.main.GetComponent<CameraControl>().ChangePlayerPos();
 
             FadeOut(changeTime);
         });

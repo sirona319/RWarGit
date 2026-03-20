@@ -2,11 +2,16 @@
 
 public class CharaParam : CharaBase
 {
+    public GameObject playerLengeGoAtk=null;
+    public GameObject playerLengeGoMove= null;
+
     public string charaName;
     public int hp;
     public string atkRank;
     public string defRank;
     public string moveRank;
+
+    public string atkLengeRank;
 
     public string skill;
 
@@ -51,4 +56,38 @@ public class CharaParam : CharaBase
 
         return atkVal+randHit;
     }
+
+    public float GetAtkLengeRankVal()
+    {
+        //var randHit = Random.Range(0, randNo + 1);
+        float val = 0;
+        if (moveRank == "S")
+            val = 4;
+        if (moveRank == "A")
+            val = 3;
+        if (moveRank == "B")
+            val = 2;
+        if (moveRank == "C")
+            val = 1f;
+
+        return val;
+    }
+
+    public float GetMoveRankVal()
+    {
+        //var randHit = Random.Range(0, randNo + 1);
+        float val = 0;
+        if (moveRank == "S")
+            val = 4;
+        if (moveRank == "A")
+            val = 3;
+        if (moveRank == "B")
+            val = 2;
+        if (moveRank == "C")
+            val = 2f;
+
+        return val;
+    }
+
+
 }

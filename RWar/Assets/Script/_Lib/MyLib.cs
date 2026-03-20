@@ -336,6 +336,16 @@ public static class MyLib
         }
     }
 
+    public static void TargetCamera(GameObject target,Transform tr,float interpolant)
+    {
+        var eDir = target.transform.position - tr.position;
+
+        var elookAtRotation = Quaternion.LookRotation(eDir, Vector3.up);
+
+        //const float INTERPOLANT = 5f;補間関数
+        tr.rotation = Quaternion.Lerp(tr.rotation, elookAtRotation, Time.deltaTime * interpolant);
+    }
+
     #endregion
 
     #region　レイ
@@ -530,6 +540,15 @@ public static class MyLib
     #endregion
 
     #region　コルーチン
+
+
+    /*            
+    StartCoroutine(MyLib.DelayCoroutine(1.5f, () =>
+    {
+        GameObject.FindGameObjectWithTag("TurnMgr").GetComponent<TurnMgr>().ChangeEnemyTurn(true);
+        isTurnChange = false;
+    }));
+     */
 
 
     /// <summary>

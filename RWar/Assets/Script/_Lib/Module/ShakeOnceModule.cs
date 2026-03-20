@@ -1,9 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class ShakeOnceModule : MonoBehaviour
 {
 
     [SerializeField] bool awakeShake;
+    //揺らす長さ
+    [SerializeField] float shakeLength = 0.15f;
+    //揺らす力
+    [SerializeField] float power = 0.3f;
+
+    float time = 0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -13,7 +20,10 @@ public class ShakeOnceModule : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        time+= Time.deltaTime;
+
+        if (time > shakeLength)
+            enabled = false;
     }
 
     void OnEnable()
@@ -28,10 +38,7 @@ public class ShakeOnceModule : MonoBehaviour
 
         //https://baba-s.hatenablog.com/entry/2018/03/14/170400
 
-        //揺らす長さ
-        const float shakeLength = 0.15f;
-        //揺らす力
-        const float power = 0.3f;
+
 
         StartCoroutine(MyLib.DoShake(shakeLength, power, transform));
 
