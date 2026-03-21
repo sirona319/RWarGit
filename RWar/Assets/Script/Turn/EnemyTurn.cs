@@ -28,8 +28,8 @@ public class EnemyTurn : MonoBehaviour
         var en = GameObject.FindGameObjectsWithTag("Enemy");
         if(en==null||en.Length<=0)
         {
-            turnMgr.ChangeEnemyTurn(false);
-            turnMgr.GetComponent<Image>().color = new Color(0.5f, 1, 1, 1f);
+            //turnMgr.ChangeEnemyTurn(false);
+            //turnMgr.GetComponent<Image>().color = new Color(0.5f, 1, 1, 1f);
             Debug.Log("敵がいないからゲーム終了"+ en.Length);
 
             GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(true);
@@ -132,6 +132,7 @@ public class EnemyTurn : MonoBehaviour
             //ターン終了
             turnMgr.ChangeEnemyTurn(false);
             turnMgr.GetComponent<Image>().color = new Color(0.5f, 1, 1, 1f);
+
 
             gameObject.SetActive(false);
         }

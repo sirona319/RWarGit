@@ -28,6 +28,10 @@ public class TimeDestroy : MonoBehaviour
           transform.position,
           Quaternion.identity);
 
+        //崖から石がパラパラ落ちる2
+        MyLib.MyPlayOneSound("SE/崖から石がパラパラ落ちる2", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
+
+
         Destroy(gameObject);
     }
 }

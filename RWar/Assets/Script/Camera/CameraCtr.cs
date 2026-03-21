@@ -26,10 +26,10 @@ public class CameraCtr : MonoBehaviour
         }
 
 
-        var t = transform.position;
-        t.x = cameraTarget.position.x;
-        t.z = cameraTarget.position.z;
-        transform.position = t;
+        //var t = transform.position;
+        //t.x = cameraTarget.position.x;
+        //t.z = cameraTarget.position.z;
+        //transform.position = t;
 
         //Camera.main.orthographicSize = cameraSize;
 

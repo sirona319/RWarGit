@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 //using UnityEngine.InputSystem; ProjectSetting→Player→OtherSettings→ActiveInputHandlingをInputSystemPackageにする必要がある
 public class MouseControlSelect : MonoBehaviour
@@ -60,8 +61,16 @@ public class MouseControlSelect : MonoBehaviour
 
         /////
         if (!Input.GetMouseButtonDown(LEFT)) return;
-        
 
+        if (GameObject.FindGameObjectsWithTag("Chara") == null || GameObject.FindGameObjectsWithTag("Chara").Length <= 0)
+        {
+            //ゲーム終了　負け
+            GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(false);
+            MyLib.MyPlayOneSound("SE/Gameover", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
+            Debug.Log("味方いないからターン終了 ゲーム終了　負け");
+            //turnMgr.ChangeEnemyTurn(false);
+            return;
+        }
         selectObj = MyLib.DebugRayViewCameraPosZ();
 
         //var createPos = MyLib.DebugRayViewCameraPosXZ();
@@ -92,7 +101,7 @@ public class MouseControlSelect : MonoBehaviour
         {
             charaUI.CharaSelectOn();
             isCharaSelect = true;
-
+            MyLib.MyPlayOneSound("SE/決定ボタンを押す34", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
         }
 
         else if(selectObj.tag == "MoveErea")
@@ -201,7 +210,8 @@ public class MouseControlSelect : MonoBehaviour
 
             StartCoroutine(MyLib.DelayCoroutine(1f, () =>
             {
-                turnMgr.ChangeEnemyTurn(true);
+                turnMgr.ChangeReTurn(true);
+                //Camera.main.GetComponent<MoveCamera>().SetDown();
 
             }));
 
@@ -277,6 +287,7 @@ public class MouseControlSelect : MonoBehaviour
     {
         if (!Input.GetMouseButtonDown(RIGHT)) return;
 
+        MyLib.MyPlayOneSound("SE/ビープ音5", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
         isCharaSelect = false;
 
         charaUI.CharaSelectOff();

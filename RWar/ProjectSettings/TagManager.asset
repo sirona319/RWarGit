@@ -17,6 +17,7 @@ TagManager:
   - FxTemporaire
   - ParticleMgr
   - GameMgr
+  - Sup
   layers:
   - Default
   - TransparentFX
@@ -30,7 +31,7 @@ TagManager:
   - 
   - Lenge
   - 
-  - 
+  - camera
   - 
   - 
   - 
