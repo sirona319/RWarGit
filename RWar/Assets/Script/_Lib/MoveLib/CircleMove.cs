@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
-using static UnityEditor.PlayerSettings;
+
 public class CircleMove : BaseMove
 {
     //https://nekojara.city/unity-circular-motion

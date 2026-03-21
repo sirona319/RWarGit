@@ -1,6 +1,4 @@
-﻿using UnityEditor.EditorTools;
-using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
+﻿using UnityEngine;
 
 public class CircleMagazine : BaseMagazine
 {

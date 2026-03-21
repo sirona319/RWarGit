@@ -1,10 +1,4 @@
-﻿using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Net.Mail;
-using UnityEditor.VersionControl;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class ActiveMessagePanel : MonoBehaviour

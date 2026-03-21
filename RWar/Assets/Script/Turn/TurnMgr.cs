@@ -12,13 +12,18 @@ public class TurnMgr : MonoBehaviour
 
     public bool isReTurn = false;
 
+
+    public bool isWait = false;
+
     public void ChangeEnemyTurn(bool isTurn)
     {
+        Camera.main.transform.position = new Vector3(0, Camera.main.transform.position.y, 0);
         isEnemyTurn = isTurn;
         et.gameObject.SetActive(isTurn);
     }
     public void ChangePlayerTurn(bool isTurn)
     {
+        Camera.main.transform.position = new Vector3(0, Camera.main.transform.position.y, 0);
         isPlayerTurn = isTurn;
     }
     public void ChangeReTurn(bool isTurn)
@@ -37,6 +42,8 @@ public class TurnMgr : MonoBehaviour
         {
             GetComponent<Button>().enabled = false;
         }
+
+        if (!isWait) return;
 
         //if (!isEnemyTurn && !isPlayerTurn)
         //{

@@ -7,7 +7,7 @@ public class MouseControlSelect : MonoBehaviour
 
     const int LEFT = 0;
     const int RIGHT = 1;
-    const int MIDDLE = 1;//ホイールクリック
+    //const int MIDDLE = 1;//ホイールクリック
 
     [SerializeField] float XLIMIT = 8.5f;
    // [SerializeField] float YLIMIT = 0f;
@@ -103,7 +103,7 @@ public class MouseControlSelect : MonoBehaviour
 
             //パラメーター　取得
 
-            charaUI.charaText.text = selectObj.GetComponent<CharaParam>().charaName;
+        charaUI.charaText.text = selectObj.GetComponent<CharaParam>().charaName;
         charaUI.hpText.text= selectObj.GetComponent<CharaParam>().hp.ToString();
         charaUI.atkText.text = selectObj.GetComponent<CharaParam>().atkRank;
         charaUI.defText.text = selectObj.GetComponent<CharaParam>().defRank;
@@ -168,9 +168,22 @@ public class MouseControlSelect : MonoBehaviour
 
             select.GetComponent<CharaParam>().hp-= damageVal;
 
+            Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkPt,
+              select.transform.position,
+              Quaternion.identity);
+            MyLib.MyPlayOneSound("SE/重いパンチ3", 1f, gameObject);
 
-            if(select.GetComponent<CharaParam>().hp<=0)
+            if (select.GetComponent<CharaParam>().hp<=0)
+            {
                 select.GetComponent<TimeDestroy>().SetTime();
+                //StartCoroutine(MyLib.DelayCoroutine(1f, () =>
+                //{
+                //    Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().deadPt,
+                //        select.transform.position,
+                //        Quaternion.identity);
+
+                //}));
+            }
             //攻撃不可能ならターン終了
             //攻撃可能なら攻撃する　複数なら選択　攻撃後強制終了　ターン
 

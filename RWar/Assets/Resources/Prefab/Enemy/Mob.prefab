@@ -312,6 +312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShakeOnceModule
   awakeShake: 0
+  shakeLength: 0.15
+  power: 0.3
 --- !u!1 &8852076704687215291
 GameObject:
   m_ObjectHideFlags: 0

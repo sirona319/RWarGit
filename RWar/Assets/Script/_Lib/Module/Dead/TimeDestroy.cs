@@ -24,6 +24,10 @@ public class TimeDestroy : MonoBehaviour
         yield return new WaitForSeconds(time);
         Debug.Log("TimeDestroy:" + gameObject.name);
 
+        Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().deadPt,
+          transform.position,
+          Quaternion.identity);
+
         Destroy(gameObject);
     }
 }
