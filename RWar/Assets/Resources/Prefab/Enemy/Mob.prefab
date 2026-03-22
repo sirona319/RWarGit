@@ -28,7 +28,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3609695028331468118}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1.19}
   m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 3469119369186427069}
   - component: {fileID: 5132773314928310786}
   - component: {fileID: -5908395036021470451}
+  - component: {fileID: -865977748755181830}
   m_Layer: 7
   m_Name: Mob
   m_TagString: Chara
@@ -283,7 +284,6 @@ MonoBehaviour:
   atkLengeRank: C
   skill: atk
   randNo: 5
-  damageUI: {fileID: 63350238632653512}
   isAtkTarget: 0
 --- !u!114 &5132773314928310786
 MonoBehaviour:
@@ -314,6 +314,19 @@ MonoBehaviour:
   awakeShake: 0
   shakeLength: 0.15
   power: 0.3
+--- !u!114 &-865977748755181830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749828230399504438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b7ca5acf9f01c4a9cc433b8f51b10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DOChangeHpUI
+  textUI: {fileID: 5462223793736404201}
 --- !u!1 &8852076704687215291
 GameObject:
   m_ObjectHideFlags: 0

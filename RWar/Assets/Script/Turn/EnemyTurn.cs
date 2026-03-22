@@ -5,7 +5,7 @@ public class EnemyTurn : MonoBehaviour
 {
 
     [SerializeField] Vector3 sPos = new Vector3(0, 0, 0);
-    [SerializeField] bool isPosSave = false;
+    //[SerializeField] bool isPosSave = false;
 
     CharaParam enParam;
 
@@ -28,15 +28,11 @@ public class EnemyTurn : MonoBehaviour
         var en = GameObject.FindGameObjectsWithTag("Enemy");
         if(en==null||en.Length<=0)
         {
-            //turnMgr.ChangeEnemyTurn(false);
-            //turnMgr.GetComponent<Image>().color = new Color(0.5f, 1, 1, 1f);
-            Debug.Log("敵がいないからゲーム終了"+ en.Length);
-
             GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(true);
-            MyLib.MyPlayOneSound("SE/victory", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
             //ゲーム終了　勝ち
             return;
         }
+
         var randHit = Random.Range(0, en.Length);
         enParam = en[randHit].GetComponent<CharaParam>();
 
@@ -87,9 +83,6 @@ public class EnemyTurn : MonoBehaviour
         {
             //ゲーム終了　負け
             GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(false);
-            MyLib.MyPlayOneSound("SE/Gameover", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
-            Debug.Log("味方いないからターン終了 ゲーム終了　負け");
-            //turnMgr.ChangeEnemyTurn(false);
             return true;
         }
 
@@ -97,32 +90,33 @@ public class EnemyTurn : MonoBehaviour
         var cPos = tcParam.transform.position;//一番近い味方キャラを取得
         var atkDis = Vector3.Distance(enParam.transform.position, cPos);
         DEBUGLENATK = atkDis;
+
+        //攻撃範囲内に入っていたら攻撃
         if (atkDis < enParam.GetAtkLengeRankVal())
         {
-            //攻撃
+
             Debug.Log(enParam.name + "ENEMY　攻撃した＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿");
 
             tcParam.GetComponent<ShakeOnceModule>().enabled = true;
 
             //敵のHP　減少　死亡処理など
             var damageVal = enParam.GetAtkRandVal();
-
-
-            tcParam.damageUI.DamegeView(damageVal);
+            tcParam.GetComponent<DOChangeHpUI>().DamegeView(enParam.GetAtkRandVal());
             tcParam.hp -= damageVal;
+
             Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkPt,
               tcParam.transform.position,
               Quaternion.identity);
 
   ;
-            MyLib.MyPlayOneSound("SE/重いパンチ3", 1f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
+            MyLib.MyPlayOneSoundSingle("SE/重いパンチ3", 1f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
 
             if (tcParam.hp <= 0)
                 tcParam.GetComponent<TimeDestroy>().SetTime();
 
 
 
-            //StartCoroutine(MyLib.DelayCoroutine(1f, () =>
+            //StartCoroutine(MyLib.DelayCoroutine(1.5f, () =>
             //{
             //    turnMgr.ChangePlayerTurn(true);
 

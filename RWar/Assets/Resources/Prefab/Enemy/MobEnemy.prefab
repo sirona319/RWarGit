@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 3821285152606264125}
   - component: {fileID: 3796649816927796359}
   - component: {fileID: 8670113428333305219}
+  - component: {fileID: 5791337205247384783}
   m_Layer: 0
   m_Name: MobEnemy
   m_TagString: Enemy
@@ -420,7 +421,7 @@ MonoBehaviour:
   atkLengeRank: C
   skill: none
   randNo: 5
-  damageUI: {fileID: 4918108613860104329}
+  chageHpUI: {fileID: 0}
   isAtkTarget: 0
 --- !u!114 &3796649816927796359
 MonoBehaviour:
@@ -451,3 +452,16 @@ MonoBehaviour:
   awakeShake: 0
   shakeLength: 0.15
   power: 0.3
+--- !u!114 &5791337205247384783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343108614684219213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7b7ca5acf9f01c4a9cc433b8f51b10e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DOChangeHpUI
+  textUI: {fileID: 5196745636030326060}

@@ -7,30 +7,36 @@ public class GameMgr : MonoBehaviour
 
     [SerializeField] TMP_Text lose;
 
-    [SerializeField] float gameEndTime = 1f;
+    //[SerializeField] float gameEndTime = 1f;
 
     [SerializeField] float fadeStartTime = 2f;
     [SerializeField] float fadeEndTime = 3f;
 
     [SerializeField] EnumSceneName.SceneNameType SceneName;
 
+    bool isCallEnd = false;
+
     public void GameEnd(bool isVic)
     {
+        if (isCallEnd) return;
+
+        var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
         if (isVic)
         {
             vic.gameObject.SetActive(true);
+            MyLib.MyPlayOneSound("SE/Gameover", 0.3f, se);
         }
         else
         {
             lose.gameObject.SetActive(true);
+            MyLib.MyPlayOneSound("SE/victory", 0.3f, se);
+
         }
-        StartCoroutine(MyLib.DelayCoroutine(gameEndTime, () =>
-        {
-            //MySceneManager.I.LoadScene("TitleScene");
-        }));
 
         GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().SceneFade
             (SceneName.ToString(), fadeStartTime, fadeEndTime);
+
+        isCallEnd = true;
     }
 
 }

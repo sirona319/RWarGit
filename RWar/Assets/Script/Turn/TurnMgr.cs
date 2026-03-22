@@ -6,7 +6,7 @@ public class TurnMgr : MonoBehaviour
 {
     [SerializeField]  TargetRot targetRot;
     [SerializeField] TMP_Text turnText;
-    public bool isEnemyTurn { get; private set; } = false;
+    public bool isEnemyTurn = false;
     [SerializeField] SupTurn supTurn;
 
     public EnemyTurn et;
@@ -16,7 +16,7 @@ public class TurnMgr : MonoBehaviour
     public bool isReTurn = false;
 
 
-    public bool isWait = false;
+    //public bool isWait = false;
 
     public void ChangeEnemyTurn(bool isTurn)
     {
@@ -27,7 +27,7 @@ public class TurnMgr : MonoBehaviour
     }
     public void ChangePlayerTurn(bool isTurn)
     {
-        if (isTurn) turnText.text = "Player Turn 1/2";
+        if (isTurn) turnText.text = "Player Turn";
 
         //Camera.main.transform.position = new Vector3(0, Camera.main.transform.position.y, 0);
         isPlayerTurn = isTurn;
@@ -38,12 +38,19 @@ public class TurnMgr : MonoBehaviour
         if (en == null || en.Length <= 0)
         {
             GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(true);
-            MyLib.MyPlayOneSound("SE/victory", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
             //ゲーム終了　勝ち
             return;
         }
 
-            if (isTurn) turnText.text = "Player Turn 2/2";
+        if (GameObject.FindGameObjectsWithTag("Chara") == null || GameObject.FindGameObjectsWithTag("Chara").Length <= 0)
+        {
+            //ゲーム終了　負け
+            GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(false);
+            return;
+        }
+
+        if (isTurn) turnText.text = "Sup Turn";
+
         if (isTurn)
             targetRot.SetDown();
         else
@@ -69,7 +76,7 @@ public class TurnMgr : MonoBehaviour
             GetComponent<Button>().enabled = false;
         }
 
-        if (!isWait) return;
+        //if (!isWait) return;
 
         //if (!isEnemyTurn && !isPlayerTurn)
         //{

@@ -17,29 +17,9 @@ public class CharaParam : CharaBase
 
 
 
-    [SerializeField] int randNo = 3;
-    public DamageUI damageUI;
+    [SerializeField] int randNo = 3; //乱数　攻撃に加算される値の上限
 
     public bool isAtkTarget = false;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void TestBut()
-    {
-        Debug.Log("Test");
-    }
-
-
 
     public int GetAtkRandVal()
     {
@@ -47,12 +27,14 @@ public class CharaParam : CharaBase
         int atkVal = 0;
         if (atkRank == "S")
             atkVal = 30;
-        if (atkRank == "A")
+        else if (atkRank == "A")
             atkVal = 25;
-        if (atkRank == "B")
+        else if (atkRank == "B")
             atkVal = 15;
-        if (atkRank == "C")
+        else if (atkRank == "C")
             atkVal = 5;
+        else
+            Debug.Log("ランクエラー　:");
 
         return atkVal+randHit;
     }
@@ -63,12 +45,14 @@ public class CharaParam : CharaBase
         float val = 0;
         if (moveRank == "S")
             val = 4;
-        if (moveRank == "A")
+        else if (moveRank == "A")
             val = 3;
-        if (moveRank == "B")
+        else if (moveRank == "B")
             val = 2;
-        if (moveRank == "C")
+        else if (moveRank == "C")
             val = 1f;
+        else
+            Debug.Log("ランクエラー　:");
 
         return val;
     }
@@ -79,15 +63,48 @@ public class CharaParam : CharaBase
         float val = 0;
         if (moveRank == "S")
             val = 4;
-        if (moveRank == "A")
+        else if (moveRank == "A")
             val = 3;
-        if (moveRank == "B")
+        else if (moveRank == "B")
             val = 2;
-        if (moveRank == "C")
-            val = 2f;
+        else if (moveRank == "C")
+            val = 1f;
+        else
+            Debug.Log("ランクエラー　:");
 
-        return val;
+            return val;
     }
 
 
+    //public bool RanKUp(ref string rank)
+    //{
+    //    if (rank == "S")
+    //        return false;
+    //    else if (rank == "A")
+    //        rank = "S";
+    //    else if (rank == "B")
+    //        rank = "A";
+    //    else if (rank == "C")
+    //        rank = "B";
+    //    else
+    //        Debug.Log("ランクエラー　:");
+
+    //    return true;
+    //}
+
+    //public bool RanKDown(ref string rank)
+    //{
+    //    if (rank == "S")
+    //        rank = "A";
+    //    else if (rank == "A")
+    //        rank = "B";
+    //    else if (rank == "B")
+    //        rank = "C";
+    //    else if (rank == "C")
+    //        return false;
+    //    else
+    //        Debug.Log("ランクエラー　:");
+
+    //    return true;
+    //}
 }

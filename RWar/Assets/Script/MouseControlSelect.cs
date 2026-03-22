@@ -10,9 +10,9 @@ public class MouseControlSelect : MonoBehaviour
     const int RIGHT = 1;
     //const int MIDDLE = 1;//ホイールクリック
 
-    [SerializeField] float XLIMIT = 8.5f;
+    //[SerializeField] float XLIMIT = 8.5f;
    // [SerializeField] float YLIMIT = 0f;
-    [SerializeField] float ZLIMIT = 8.5f;
+    //[SerializeField] float ZLIMIT = 8.5f;
 
 
     CharaUI charaUI;
@@ -47,7 +47,6 @@ public class MouseControlSelect : MonoBehaviour
             return;
         }
 
-
         /////
         if (isCharaSelect)
         {
@@ -55,20 +54,21 @@ public class MouseControlSelect : MonoBehaviour
             return;
         }
 
-
-
-
-
         /////
         if (!Input.GetMouseButtonDown(LEFT)) return;
+
+        var en = GameObject.FindGameObjectsWithTag("Enemy");
+        if (en == null || en.Length <= 0)
+        {
+            GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(true);
+            //ゲーム終了　勝ち
+            return;
+        }
 
         if (GameObject.FindGameObjectsWithTag("Chara") == null || GameObject.FindGameObjectsWithTag("Chara").Length <= 0)
         {
             //ゲーム終了　負け
             GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(false);
-            MyLib.MyPlayOneSound("SE/Gameover", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
-            Debug.Log("味方いないからターン終了 ゲーム終了　負け");
-            //turnMgr.ChangeEnemyTurn(false);
             return;
         }
         selectObj = MyLib.DebugRayViewCameraPosZ();
@@ -106,7 +106,6 @@ public class MouseControlSelect : MonoBehaviour
 
         else if(selectObj.tag == "MoveErea")
         {
-
             return;
         }
 
@@ -117,11 +116,8 @@ public class MouseControlSelect : MonoBehaviour
         charaUI.atkText.text = selectObj.GetComponent<CharaParam>().atkRank;
         charaUI.defText.text = selectObj.GetComponent<CharaParam>().defRank;
         charaUI.moveText.text = selectObj.GetComponent<CharaParam>().moveRank;
-        
-        
 
     }
-
 
 
 
@@ -135,7 +131,6 @@ public class MouseControlSelect : MonoBehaviour
         if (select == null) return;
 
 
-
         if (select.isStatic/*||selectObj.tag=="Untagged"*/)
         {
             select = null;
@@ -147,57 +142,37 @@ public class MouseControlSelect : MonoBehaviour
             selectObj.transform.position = MyLib.DebugRayViewCameraPosXZ();
             GameObject.FindGameObjectsWithTag("MoveErea").ToList().ForEach(x => x.SetActive(false));
             isMoveEnd = true;
-            //moveEnd
             return;
-            //isMoveEreaEnable = false;
-            //攻撃不可能ならターン終了
-            //攻撃可能なら攻撃する　複数なら選択　
+
         }
         else if (select.tag == "Enemy")
         {
             //AtkEreaの範囲に入っている敵のみ選択可能にする
-            if(!select.GetComponent<CharaParam>().isAtkTarget)
-            {
+            if(!select.GetComponent<CharaParam>().isAtkTarget)return;
+            
 
-                //GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => x.GetComponent<CharaParam>().isAtkTarget = false);
-                //GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
-                //isAtkEreaEnable = false;
-                return;
-            }
-            //selectObj.transform.position = MyLib.DebugRayViewCameraPosXZ();
             Debug.Log(select.name+"攻撃した＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿");
 
             select.GetComponent<ShakeOnceModule>().enabled = true;
-            //敵のHP　減少　死亡処理など
-            //selectObj.GetComponent<CharaParam>().atkRank;
 
+            //敵のHP　減少　死亡処理など
             var damageVal = selectObj.GetComponent<CharaParam>().GetAtkRandVal();
 
-            select.GetComponent<CharaParam>().damageUI.DamegeView(damageVal);
+            select.GetComponent<DOChangeHpUI>().DamegeView(damageVal);
 
             select.GetComponent<CharaParam>().hp-= damageVal;
 
             Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkPt,
               select.transform.position,
               Quaternion.identity);
+
             MyLib.MyPlayOneSound("SE/重いパンチ3", 1f, gameObject);
 
             if (select.GetComponent<CharaParam>().hp<=0)
-            {
                 select.GetComponent<TimeDestroy>().SetTime();
-                //StartCoroutine(MyLib.DelayCoroutine(1f, () =>
-                //{
-                //    Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().deadPt,
-                //        select.transform.position,
-                //        Quaternion.identity);
-
-                //}));
-            }
+            
             //攻撃不可能ならターン終了
             //攻撃可能なら攻撃する　複数なら選択　攻撃後強制終了　ターン
-
-
-            //
             charaUI.CharaSelectOff();
             isCharaSelect = false;
             selectObj = null;
@@ -205,8 +180,6 @@ public class MouseControlSelect : MonoBehaviour
             turnMgr.isPlayerTurn = false;
 
             //　
-
-
 
             StartCoroutine(MyLib.DelayCoroutine(1f, () =>
             {
@@ -224,11 +197,6 @@ public class MouseControlSelect : MonoBehaviour
    
         }
 
-        //GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => x.GetComponent<CharaParam>().isAtkTarget = false);
-        //GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
-        //isAtkEreaEnable = false;
-
-        //isMoveEreaEnable = false;
     }
 
     //ボタンコンポーネントでの呼び出し

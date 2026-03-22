@@ -11,34 +11,8 @@ public class CameraCtr : MonoBehaviour
     public Transform cameraTarget; // Z -10
     [SerializeField] float cameraSpd = 0.08f;
 
-    [SerializeField] float cameraTargetLen = 13f;
+    //[SerializeField] float cameraTargetLen = 13f;
 
-    //[SerializeField] float cameraSize = 5f;
-    void Start()
-    {
-        if (cameraTarget == null)
-        {
-            //cameraTarget= GameObject.FindGameObjectWithTag(TagName.Player).transform.Find("CameraTarget").transform;
-            //var pos = transform.position;
-            //pos.z = -10f;
-            //transform.position = pos;
-            return;
-        }
-
-
-        //var t = transform.position;
-        //t.x = cameraTarget.position.x;
-        //t.z = cameraTarget.position.z;
-        //transform.position = t;
-
-        //Camera.main.orthographicSize = cameraSize;
-
-    }
-
-    void Update()
-    {
-        //CameraEventUpdate();
-    }
 
     private void FixedUpdate()
     {

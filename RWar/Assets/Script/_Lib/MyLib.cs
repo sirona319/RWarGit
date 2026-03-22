@@ -776,13 +776,13 @@ public static class MyLib
     /// </summary>
     /// <param name="name"></param>
     /// <param name="obj"></param>
-    public static void MyPlayOneSoundSingle(string name, GameObject obj)
+    public static void MyPlayOneSoundSingle(string name,float volume, GameObject obj)
     {
         var audioSource = obj.GetComponent<AudioSource>();
         var sound = (AudioClip)Resources.Load(name);
 
         if (!audioSource.isPlaying)
-            audioSource.PlayOneShot(sound);
+            audioSource.PlayOneShot(sound, volume);
     }
 
     public static IEnumerator SoundFadeOffCoroutine(AudioSource audio, float fadeSpeed)
