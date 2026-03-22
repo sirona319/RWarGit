@@ -20,16 +20,20 @@ public class MouseControlSelect : MonoBehaviour
     bool isCharaSelect = false;
     Vector3 savePos;//キャンセル時に戻す座標を保存
 
+    [SerializeField] float ereaY=-0.8f;
     [SerializeField]GameObject moveEreaGo;
-    [SerializeField] bool isMoveEreaEnable = false;
+    //[SerializeField] bool isMoveEreaEnable = false;
 
     [SerializeField] GameObject atkEreaGo;
-    [SerializeField] bool isAtkEreaEnable = false;
+    //[SerializeField] bool isAtkEreaEnable = false;
 
     [SerializeField] bool isMoveEnd = false;
 
     [SerializeField] TurnMgr turnMgr;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    GameObject atkEreaGoSaveEnemy;
+    GameObject atkEreaGoSave;
+    GameObject moveEreaGoSave;
     void Start()
     {
         charaUI = GameObject.FindGameObjectWithTag("CharaUI").GetComponent<CharaUI>();
@@ -92,10 +96,10 @@ public class MouseControlSelect : MonoBehaviour
         if (selectObj.tag == "Enemy")
         {
             charaUI.EnemySelectOn();
-
-            Instantiate(
+            Destroy(atkEreaGoSaveEnemy);
+            atkEreaGoSaveEnemy =Instantiate(
                 selectObj.GetComponent<CharaParam>().playerLengeGoAtk,
-                new Vector3(selectObj.transform.position.x, -0.5f, selectObj.transform.position.z),
+                new Vector3(selectObj.transform.position.x, ereaY, selectObj.transform.position.z),
                 Quaternion.identity);
 
             //パラメーター　取得
@@ -112,6 +116,8 @@ public class MouseControlSelect : MonoBehaviour
             MyLib.MyPlayOneSound("SE/決定ボタンを押す34", volume, se);
 
             SetMobUI();
+
+            selectObj.GetComponent<RotModule>().speed = 20;
         }
 
         else if (selectObj.tag == "MoveErea")
@@ -144,7 +150,10 @@ public class MouseControlSelect : MonoBehaviour
         if (!Input.GetMouseButtonDown(LEFT)) return;
 
 
-        var select = MyLib.DebugRayViewCameraPosZ();
+        //var select = MyLib.DebugRayViewCameraPosZ();
+
+        var select = MyLib.DebugRayViewCameraPosZLayer("Enemy", "MoveErea");
+
         if (select == null) return;
 
 
@@ -159,6 +168,7 @@ public class MouseControlSelect : MonoBehaviour
             selectObj.transform.position = MyLib.DebugRayViewCameraPosXZ();
             GameObject.FindGameObjectsWithTag("MoveErea").ToList().ForEach(x => x.SetActive(false));
             isMoveEnd = true;
+            //selectObj.GetComponent<RotModule>().enabled = false;
             return;
 
         }
@@ -175,7 +185,7 @@ public class MouseControlSelect : MonoBehaviour
             //敵のHP　減少　死亡処理など
             var damageVal = selectObj.GetComponent<CharaParam>().GetAtkRandVal();
 
-            select.GetComponent<DOChangeHpUI>().DamegeView(damageVal);
+            select.GetComponent<CharaParam>().doChangeHpUI.DamegeView(damageVal);
 
             select.GetComponent<CharaParam>().hp-= damageVal;
 
@@ -192,6 +202,8 @@ public class MouseControlSelect : MonoBehaviour
             //攻撃可能なら攻撃する　複数なら選択　攻撃後強制終了　ターン
             charaUI.CharaSelectOff();
             isCharaSelect = false;
+            selectObj.GetComponent<RotModule>().speed = 0;
+
             selectObj = null;
             isMoveEnd = false;
             turnMgr.isPlayerTurn = false;
@@ -208,9 +220,12 @@ public class MouseControlSelect : MonoBehaviour
             GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach
                 (x => x.GetComponent<CharaParam>().isAtkTarget = false);
             GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
-            isAtkEreaEnable = false;
+            //isAtkEreaEnable = false;
 
-            isMoveEreaEnable = false;
+            //isMoveEreaEnable = false;
+            Destroy(moveEreaGoSave);
+            Destroy(atkEreaGoSave);
+
             return;
    
         }
@@ -221,33 +236,47 @@ public class MouseControlSelect : MonoBehaviour
     public void SetMoveEreaGo()
     {
         if (!turnMgr.isPlayerTurn) return;
-        if (isMoveEreaEnable) return;
+        //if (isMoveEreaEnable) return;
         if(selectObj==null) return;
         GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
-        isAtkEreaEnable = false;
+        //isAtkEreaEnable = false;
+        if(moveEreaGoSave!=null)
+        {
+            return;
+        }
+        Destroy(atkEreaGoSave);
+        //Debug.Log(atkEreaGoSave);
+        //atkEreaGoSave = null;
 
-        Instantiate(
+        moveEreaGoSave =Instantiate(
             selectObj.GetComponent<CharaParam>().playerLengeGoMove,
-            new Vector3(selectObj.transform.position.x, -0.5f, selectObj.transform.position.z),
+            new Vector3(selectObj.transform.position.x, ereaY, selectObj.transform.position.z),
             Quaternion.identity);
 
-        isMoveEreaEnable = true;
+        //isMoveEreaEnable = true;
     }
 
     public void SetAtkEreaGo()
     {
         if (!turnMgr.isPlayerTurn) return;
-        if (isAtkEreaEnable) return;
+        //if (isAtkEreaEnable) return;
         if (selectObj == null) return;
         GameObject.FindGameObjectsWithTag("MoveErea").ToList().ForEach(x => x.SetActive(false));
-        isMoveEreaEnable = false;
+        //isMoveEreaEnable = false;
 
-        Instantiate(
+        if (atkEreaGoSave != null)
+        {
+            return;
+        }
+
+        Destroy(moveEreaGoSave);
+        //selectObj.GetComponent<CharaParam>().playerLengeGoAtk.SetActive(true);
+        atkEreaGoSave = Instantiate(
             selectObj.GetComponent<CharaParam>().playerLengeGoAtk,
-            new Vector3(selectObj.transform.position.x, -0.5f, selectObj.transform.position.z),
+            new Vector3(selectObj.transform.position.x, ereaY, selectObj.transform.position.z),
             Quaternion.identity);
 
-        isAtkEreaEnable = true;
+        //isAtkEreaEnable = true;
     }
 
     public void EndBottun()
@@ -259,10 +288,16 @@ public class MouseControlSelect : MonoBehaviour
 
         if (selectObj != null)
         {
+            selectObj.GetComponent<RotModule>().speed = 0;
+
             selectObj = null;
         }
-        isMoveEreaEnable = false;
-        isAtkEreaEnable = false;
+
+        Destroy(moveEreaGoSave);
+        Destroy(atkEreaGoSave);
+
+        //isMoveEreaEnable = false;
+        //isAtkEreaEnable = false;
         isMoveEnd = false;
         GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach
             (x => x.GetComponent<CharaParam>().isAtkTarget = false);
@@ -285,11 +320,14 @@ public class MouseControlSelect : MonoBehaviour
 
         if (selectObj != null)
         {
+            selectObj.GetComponent<RotModule>().speed = 0;
+
             selectObj.transform.position = savePos;
             selectObj = null;
         }
-        isMoveEreaEnable = false;
-        isAtkEreaEnable = false;
+        Destroy(moveEreaGoSave);
+        Destroy(atkEreaGoSave);
+
         isMoveEnd = false;
         GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach
             (x => x.GetComponent<CharaParam>().isAtkTarget = false);

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TimeDestroy : MonoBehaviour
 {
-    public float deadTime = 1f;
+    public float deadTime = 0.3f;
 
     [SerializeField]bool isStart = true;
 

@@ -15,7 +15,7 @@ public class CharaParam : CharaBase
 
     public string skill;
 
-
+    public DOChangeHpUI doChangeHpUI;
 
     [SerializeField] int randNo = 3; //乱数　攻撃に加算される値の上限
 

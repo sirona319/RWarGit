@@ -2,6 +2,8 @@
 using TMPro;
 using UnityEngine;
 
+
+//Canvasに配置するWorldSpace　HPの変化を表示するUI　テキストはDOFadeでフェードアウトさせる　
 public class DOChangeHpUI : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textUI;

@@ -8,9 +8,11 @@ public class TitleStart : MonoBehaviour
     [SerializeField] string BottuonNameThree;
 
 
-    [SerializeField] private EnumSceneName.SceneNameType sceneNameOne;
+    [SerializeField] EnumSceneName.SceneNameType sceneNameOne;
 
     bool isSelect = false;
+
+    float fadeTime = 2f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +23,9 @@ public class TitleStart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        fadeTime -= Time.deltaTime;
+        if (fadeTime > 0) return;
+
         const int LEFT = 0;
         if (!Input.GetMouseButtonDown(LEFT)) return;
         
@@ -35,8 +40,13 @@ public class TitleStart : MonoBehaviour
             SelectStart();
         }
 
+        if (selectObj.gameObject.name == BottuonNameTwo)
+        {
+            //遷移
+            SelectStart2();
+        }
 
-        
+
 
     }
 
@@ -47,8 +57,8 @@ public class TitleStart : MonoBehaviour
 
         const float sceneChangeTime = 2f;
 
-        GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().SceneFade
-            (sceneNameOne.ToString(), 0f, sceneChangeTime);
+        GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().
+            SceneFade(sceneNameOne.ToString(), 0f, sceneChangeTime);
 
         var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
         var volume = .3f;
@@ -57,18 +67,21 @@ public class TitleStart : MonoBehaviour
         isSelect = true;
     }
 
-    //public void SelectStart2()
-    //{
-    //    if (isSelect) return;
+    public void SelectStart2()
+    {
+        if (isSelect) return;
 
-    //    const float sceneChangeTime = 2f;
+        const float sceneChangeTime = 2f;
 
-    //    GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().SceneFade(sceneNameOne.ToString(), 0f, sceneChangeTime);
+        GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().
+            SceneFade(BottuonNameTwo.ToString(), 0f, sceneChangeTime);
 
-    //    MyLib.MyPlayOneSound("SE/決定ボタンを押す12", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
+        var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
+        var volume = .3f;
+        MyLib.MyPlayOneSound("SE/決定ボタンを押す12", volume, se);
 
-    //    isSelect = true;
-    //}
+        isSelect = true;
+    }
 
     //public void SelectStart3()
     //{
@@ -76,9 +89,12 @@ public class TitleStart : MonoBehaviour
 
     //    const float sceneChangeTime = 2f;
 
-    //    GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().SceneFade(sceneNameOne.ToString(), 0f, sceneChangeTime);
+    //    GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().
+    //    SceneFade(sceneNameOne.ToString(), 0f, sceneChangeTime);
 
-    //    MyLib.MyPlayOneSound("SE/決定ボタンを押す12", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
+    //var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
+    //var volume = .3f;
+    //MyLib.MyPlayOneSound("SE/決定ボタンを押す12", volume, se);
 
     //    isSelect = true;
     //}

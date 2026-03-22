@@ -403,6 +403,65 @@ public static class MyLib
         return new Vector3(hit.point.x, 0f, hit.point.z);
     }
 
+    //特定のレイヤーのみ
+    public static GameObject DebugRayViewCameraPosZLayer(string layerName = "", bool DebugDraw = true)
+    {
+        float distance = 1000f;
+        float duration = 50f;
+
+        Camera mainCam = Camera.main;
+        if (mainCam == null) return null;
+
+        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+
+        if (DebugDraw)
+        {
+            Debug.DrawRay(ray.origin, ray.direction * distance, Color.red, duration, false);
+        }
+
+        // レイヤーマスクの作成（引数が空なら全レイヤーを対象にする）
+        int layerMask = string.IsNullOrEmpty(layerName) ? Physics.DefaultRaycastLayers : 1 << LayerMask.NameToLayer(layerName);
+
+        // 引数に layerMask を追加
+        if (Physics.Raycast(ray, out RaycastHit hit, distance, layerMask))
+        {
+            if (DebugDraw) Debug.Log($"Hit [{layerName}]: {hit.collider.gameObject.name}");
+            return hit.collider.gameObject;
+        }
+
+        return null;
+    }
+
+    //(1 << LayerMask.NameToLayer("Enemy")) | (1 << LayerMask.NameToLayer("NPC"))
+    public static GameObject DebugRayViewCameraPosZLayer(string layerName = "", string layerName2 = "", bool DebugDraw = true)
+    {
+        float distance = 1000f;
+        float duration = 50f;
+
+        Camera mainCam = Camera.main;
+        if (mainCam == null) return null;
+
+        Ray ray = mainCam.ScreenPointToRay(Input.mousePosition);
+
+        if (DebugDraw)
+        {
+            Debug.DrawRay(ray.origin, ray.direction * distance, Color.red, duration, false);
+        }
+
+        // レイヤーマスクの作成（引数が空なら全レイヤーを対象にする）
+        int layerMask = string.IsNullOrEmpty(layerName) ? Physics.DefaultRaycastLayers : 1 << LayerMask.NameToLayer(layerName)|
+            (1<<LayerMask.NameToLayer(layerName2));
+
+        // 引数に layerMask を追加
+        if (Physics.Raycast(ray, out RaycastHit hit, distance, layerMask))
+        {
+            if (DebugDraw) Debug.Log($"Hit [{layerName}]: {hit.collider.gameObject.name}");
+            return hit.collider.gameObject;
+        }
+
+        return null;
+    }
+
     //メインカメラのZ位置 cameraZ
     //public static GameObject DebugRayViewCameraZ(float cameraZ)
     //{

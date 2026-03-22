@@ -2,6 +2,11 @@
 
 public class MEMO : MonoBehaviour
 {
+
+    [TextArea(3, 20)]
+    public string memo;
+
+    public LayerMask mask;
     /*
     パラメーターなど説明
     https://x.gd/vUvxo
@@ -80,8 +85,7 @@ public class MEMO : MonoBehaviour
 
 
 
-    //[TextArea(3, 20)]
-    //public string memo;
+
 
 
 

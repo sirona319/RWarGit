@@ -29,7 +29,7 @@ public class Sup : MonoBehaviour
                 var val = 5;
                 var charas = GameObject.FindGameObjectsWithTag("Chara").ToList();
                 charas.ForEach(g => g.GetComponent<CharaParam>().hp += val);
-                charas.ForEach(g => g.GetComponent<DOChangeHpUI>().HealView(val));
+                charas.ForEach(g => g.GetComponent<CharaParam>().doChangeHpUI.HealView(val));
 
                 MyLib.MyPlayOneSound("SE/魔法反射", 1f, se);
 
@@ -115,7 +115,7 @@ public class Sup : MonoBehaviour
                 var val = 5;
                 var ens = GameObject.FindGameObjectsWithTag("Enemy").ToList();
                 ens.ForEach(g => g.GetComponent<CharaParam>().hp -= val);
-                ens.ForEach(g => g.GetComponent<DOChangeHpUI>().DamegeView(val));
+                ens.ForEach(g => g.GetComponent<CharaParam>().doChangeHpUI.DamegeView(val));
 
                 MyLib.MyPlayOneSound("SE/スローモーション", 1f, se);
 

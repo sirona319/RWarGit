@@ -105,7 +105,7 @@ public class EnemyTurn : MonoBehaviour
 
             //敵のHP　減少　死亡処理など
             var damageVal = enParam.GetAtkRandVal();
-            tcParam.GetComponent<DOChangeHpUI>().DamegeView(enParam.GetAtkRandVal());
+            tcParam.GetComponent<CharaParam>().doChangeHpUI.DamegeView(enParam.GetAtkRandVal());
             tcParam.hp -= damageVal;
 
             Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkPt,

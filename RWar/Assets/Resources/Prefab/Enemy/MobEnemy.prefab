@@ -74,8 +74,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286705914
-  m_fontColor: {r: 0.9811321, g: 0.943063, b: 0.50445, a: 1}
+    rgba: 4282249215
+  m_fontColor: {r: 1, g: 0.93723685, b: 0.24056602, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 6759438685787459571}
   - component: {fileID: 8028671051103408506}
   - component: {fileID: 3195026581522651985}
-  - component: {fileID: 4918108613860104329}
+  - component: {fileID: 4884302235120566273}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4918108613860104329
+--- !u!114 &4884302235120566273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7b7ca5acf9f01c4a9cc433b8f51b10e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DamageUI
+  m_EditorClassIdentifier: Assembly-CSharp::DOChangeHpUI
   textUI: {fileID: 5196745636030326060}
 --- !u!1 &3343108614684219213
 GameObject:
@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 3821285152606264125}
   - component: {fileID: 3796649816927796359}
   - component: {fileID: 8670113428333305219}
-  - component: {fileID: 5791337205247384783}
   m_Layer: 0
   m_Name: MobEnemy
   m_TagString: Enemy
@@ -414,14 +413,14 @@ MonoBehaviour:
   playerLengeGoAtk: {fileID: 7562396370467831448, guid: 933af0c857fc92b419c6f36d3e929b93, type: 3}
   playerLengeGoMove: {fileID: 0}
   charaName: min
-  hp: 10
-  atkRank: C
+  hp: 30
+  atkRank: B
   defRank: C
   moveRank: C
   atkLengeRank: C
   skill: none
+  doChangeHpUI: {fileID: 4884302235120566273}
   randNo: 5
-  chageHpUI: {fileID: 0}
   isAtkTarget: 0
 --- !u!114 &3796649816927796359
 MonoBehaviour:
@@ -452,16 +451,3 @@ MonoBehaviour:
   awakeShake: 0
   shakeLength: 0.15
   power: 0.3
---- !u!114 &5791337205247384783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3343108614684219213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7b7ca5acf9f01c4a9cc433b8f51b10e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DOChangeHpUI
-  textUI: {fileID: 5196745636030326060}

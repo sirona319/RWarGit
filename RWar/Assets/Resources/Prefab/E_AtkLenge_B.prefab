@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2184289875435798973}
   - component: {fileID: 8764560028699323307}
   - component: {fileID: 5492774700555119087}
-  - component: {fileID: 1101104293778502261}
   m_Layer: 10
   m_Name: E_AtkLenge_B
   m_TagString: AtkErea
@@ -29,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 7562396370467831448}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.7, z: 0}
   m_LocalScale: {x: 3, y: 0.1, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -115,15 +114,3 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &1101104293778502261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7562396370467831448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7890267a711065846bc2e950ecb28990, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InCol

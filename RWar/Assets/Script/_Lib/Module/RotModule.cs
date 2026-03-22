@@ -7,7 +7,7 @@ public class RotModule : MonoBehaviour
     [SerializeField] bool y = false;
     [SerializeField] bool z = false;
 
-    [SerializeField] float speed=0;
+    [SerializeField] public float speed=0;
 
     [SerializeField] Transform target = null;
     //[SerializeField] float d=0;
