@@ -829,11 +829,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TurnMgr
   targetRot: {fileID: 1507370132}
   turnText: {fileID: 1741288938}
+  isEnemyTurn: 0
   supTurn: {fileID: 756089938}
   et: {fileID: 124168177}
   isPlayerTurn: 0
   isReTurn: 0
-  isWait: 0
 --- !u!4 &304079167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 105664941418184255, guid: 9a80d5f520b8ac8489870cc110cdad0a, type: 3}
@@ -1485,7 +1485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 252.43}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 4.833452, y: -2.18}
+  m_AnchoredPosition: {x: 4.833452, y: -2.8700001}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &478039793
@@ -3168,7 +3168,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 120}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -4.9748735, y: -2.2}
+  m_AnchoredPosition: {x: -4.9748735, y: -2.89}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &976461746
@@ -5159,7 +5159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 309.418}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 4.83, y: -2.58}
+  m_AnchoredPosition: {x: 4.83, y: -3.27}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1417411714
@@ -6113,7 +6113,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 430.2}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -4.7344575, y: -2.5}
+  m_AnchoredPosition: {x: -4.7344575, y: -3.19}
   m_SizeDelta: {x: 100, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1638603676
@@ -7547,7 +7547,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameMgr
   vic: {fileID: 1528293056}
   lose: {fileID: 972569838}
-  gameEndTime: 2
   fadeStartTime: 2
   fadeEndTime: 3
   SceneName: 0

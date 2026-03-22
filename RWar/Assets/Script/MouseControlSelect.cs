@@ -65,7 +65,8 @@ public class MouseControlSelect : MonoBehaviour
             return;
         }
 
-        if (GameObject.FindGameObjectsWithTag("Chara") == null || GameObject.FindGameObjectsWithTag("Chara").Length <= 0)
+        if (GameObject.FindGameObjectsWithTag("Chara") == null ||
+            GameObject.FindGameObjectsWithTag("Chara").Length <= 0)
         {
             //ゲーム終了　負け
             GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(false);
@@ -96,29 +97,45 @@ public class MouseControlSelect : MonoBehaviour
                 selectObj.GetComponent<CharaParam>().playerLengeGoAtk,
                 new Vector3(selectObj.transform.position.x, -0.5f, selectObj.transform.position.z),
                 Quaternion.identity);
-        }
-        else if(selectObj.tag == "Chara")
-        {
-            charaUI.CharaSelectOn();
-            isCharaSelect = true;
-            MyLib.MyPlayOneSound("SE/決定ボタンを押す34", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
-        }
-
-        else if(selectObj.tag == "MoveErea")
-        {
-            return;
-        }
 
             //パラメーター　取得
 
-        charaUI.charaText.text = selectObj.GetComponent<CharaParam>().charaName;
-        charaUI.hpText.text= selectObj.GetComponent<CharaParam>().hp.ToString();
-        charaUI.atkText.text = selectObj.GetComponent<CharaParam>().atkRank;
-        charaUI.defText.text = selectObj.GetComponent<CharaParam>().defRank;
-        charaUI.moveText.text = selectObj.GetComponent<CharaParam>().moveRank;
+            SetMobUI();
+        }
+        else if (selectObj.tag == "Chara")
+        {
+            charaUI.CharaSelectOn();
+            isCharaSelect = true;
+
+            var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
+            var volume = .3f;
+            MyLib.MyPlayOneSound("SE/決定ボタンを押す34", volume, se);
+
+            SetMobUI();
+        }
+
+        else if (selectObj.tag == "MoveErea")
+        {
+            return;
+        }
+        else
+            return;
+
+
 
     }
 
+
+    void SetMobUI()
+    {
+        //パラメーター　取得
+
+        charaUI.charaText.text = selectObj.GetComponent<CharaParam>().charaName;
+        charaUI.hpText.text = selectObj.GetComponent<CharaParam>().hp.ToString();
+        charaUI.atkText.text = selectObj.GetComponent<CharaParam>().atkRank;
+        charaUI.defText.text = selectObj.GetComponent<CharaParam>().defRank;
+        charaUI.moveText.text = selectObj.GetComponent<CharaParam>().moveRank;
+    }
 
 
 
@@ -188,7 +205,8 @@ public class MouseControlSelect : MonoBehaviour
 
             }));
 
-            GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => x.GetComponent<CharaParam>().isAtkTarget = false);
+            GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach
+                (x => x.GetComponent<CharaParam>().isAtkTarget = false);
             GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
             isAtkEreaEnable = false;
 
@@ -204,6 +222,7 @@ public class MouseControlSelect : MonoBehaviour
     {
         if (!turnMgr.isPlayerTurn) return;
         if (isMoveEreaEnable) return;
+        if(selectObj==null) return;
         GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
         isAtkEreaEnable = false;
 
@@ -219,6 +238,7 @@ public class MouseControlSelect : MonoBehaviour
     {
         if (!turnMgr.isPlayerTurn) return;
         if (isAtkEreaEnable) return;
+        if (selectObj == null) return;
         GameObject.FindGameObjectsWithTag("MoveErea").ToList().ForEach(x => x.SetActive(false));
         isMoveEreaEnable = false;
 
@@ -244,7 +264,8 @@ public class MouseControlSelect : MonoBehaviour
         isMoveEreaEnable = false;
         isAtkEreaEnable = false;
         isMoveEnd = false;
-        GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => x.GetComponent<CharaParam>().isAtkTarget = false);
+        GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach
+            (x => x.GetComponent<CharaParam>().isAtkTarget = false);
     }
     //・・・・・・・・・・・・・・・
 
@@ -255,7 +276,9 @@ public class MouseControlSelect : MonoBehaviour
     {
         if (!Input.GetMouseButtonDown(RIGHT)) return;
 
-        MyLib.MyPlayOneSound("SE/ビープ音5", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
+        var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
+        var volume = .3f;
+        MyLib.MyPlayOneSound("SE/ビープ音5", volume, se);
         isCharaSelect = false;
 
         charaUI.CharaSelectOff();
@@ -268,7 +291,8 @@ public class MouseControlSelect : MonoBehaviour
         isMoveEreaEnable = false;
         isAtkEreaEnable = false;
         isMoveEnd = false;
-        GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => x.GetComponent<CharaParam>().isAtkTarget = false);
+        GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach
+            (x => x.GetComponent<CharaParam>().isAtkTarget = false);
     }
 
 

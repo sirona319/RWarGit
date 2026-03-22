@@ -47,9 +47,12 @@ public class TitleStart : MonoBehaviour
 
         const float sceneChangeTime = 2f;
 
-        GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().SceneFade(sceneNameOne.ToString(), 0f, sceneChangeTime);
+        GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().SceneFade
+            (sceneNameOne.ToString(), 0f, sceneChangeTime);
 
-        MyLib.MyPlayOneSound("SE/決定ボタンを押す12", 0.3f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
+        var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
+        var volume = .3f;
+        MyLib.MyPlayOneSound("SE/決定ボタンを押す12", volume, se);
 
         isSelect = true;
     }

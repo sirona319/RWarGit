@@ -13,6 +13,9 @@ public class EnemyTurn : MonoBehaviour
     [SerializeField] float DEBUGLENATK = 0f;
 
     [SerializeField] TurnMgr turnMgr;
+
+    const float waitSceneTime = 2f;
+
     private void Start()
     {
 
@@ -69,9 +72,10 @@ public class EnemyTurn : MonoBehaviour
         {
             AtkLengeCteck();
 
-            turnMgr.ChangePlayerTurn(true);
+
             turnMgr.ChangeEnemyTurn(false);
             turnMgr.GetComponent<Image>().color = new Color(0.5f, 1, 1, 1f);
+            turnMgr.ChangePlayerTurn(true, waitSceneTime);
 
             gameObject.SetActive(false);
         }
@@ -108,24 +112,19 @@ public class EnemyTurn : MonoBehaviour
               tcParam.transform.position,
               Quaternion.identity);
 
-  ;
-            MyLib.MyPlayOneSoundSingle("SE/重いパンチ3", 1f, GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject);
+            var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
+            var volume = 1f;
+            MyLib.MyPlayOneSoundSingle("SE/重いパンチ3", volume, se);
 
             if (tcParam.hp <= 0)
                 tcParam.GetComponent<TimeDestroy>().SetTime();
 
 
-
-            //StartCoroutine(MyLib.DelayCoroutine(1.5f, () =>
-            //{
-            //    turnMgr.ChangePlayerTurn(true);
-
-            //}));
-            turnMgr.ChangePlayerTurn(true);
-
             //ターン終了
             turnMgr.ChangeEnemyTurn(false);
             turnMgr.GetComponent<Image>().color = new Color(0.5f, 1, 1, 1f);
+
+            turnMgr.ChangePlayerTurn(true, waitSceneTime);
 
 
             gameObject.SetActive(false);

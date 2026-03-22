@@ -19,7 +19,7 @@ public class CharaParam : CharaBase
 
     [SerializeField] int randNo = 3; //乱数　攻撃に加算される値の上限
 
-    public bool isAtkTarget = false;
+    public bool isAtkTarget = false;// 攻撃範囲内かどうか
 
     public int GetAtkRandVal()
     {
@@ -41,7 +41,7 @@ public class CharaParam : CharaBase
 
     public float GetAtkLengeRankVal()
     {
-        //var randHit = Random.Range(0, randNo + 1);
+
         float val = 0;
         if (moveRank == "S")
             val = 4;
@@ -59,7 +59,7 @@ public class CharaParam : CharaBase
 
     public float GetMoveRankVal()
     {
-        //var randHit = Random.Range(0, randNo + 1);
+
         float val = 0;
         if (moveRank == "S")
             val = 4;
@@ -75,36 +75,4 @@ public class CharaParam : CharaBase
             return val;
     }
 
-
-    //public bool RanKUp(ref string rank)
-    //{
-    //    if (rank == "S")
-    //        return false;
-    //    else if (rank == "A")
-    //        rank = "S";
-    //    else if (rank == "B")
-    //        rank = "A";
-    //    else if (rank == "C")
-    //        rank = "B";
-    //    else
-    //        Debug.Log("ランクエラー　:");
-
-    //    return true;
-    //}
-
-    //public bool RanKDown(ref string rank)
-    //{
-    //    if (rank == "S")
-    //        rank = "A";
-    //    else if (rank == "A")
-    //        rank = "B";
-    //    else if (rank == "B")
-    //        rank = "C";
-    //    else if (rank == "C")
-    //        return false;
-    //    else
-    //        Debug.Log("ランクエラー　:");
-
-    //    return true;
-    //}
 }

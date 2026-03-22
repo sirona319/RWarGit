@@ -31,9 +31,6 @@ public class ParticleMgr : MonoBehaviour
 
         debuffPt = (GameObject)Resources.Load("prefab/Particle/CFXR2 _CURSED_");
 
-        //CFXR Impact Glowing HDR (Blue)  
-
-        //CFXR2 _CURSED_
     }
 
     // Update is called once per frame

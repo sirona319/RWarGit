@@ -21,15 +21,16 @@ public class GameMgr : MonoBehaviour
         if (isCallEnd) return;
 
         var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
+        var volume = .3f;
         if (isVic)
         {
             vic.gameObject.SetActive(true);
-            MyLib.MyPlayOneSound("SE/victory", 0.3f, se);
+            MyLib.MyPlayOneSound("SE/victory", volume, se);
         }
         else
         {
             lose.gameObject.SetActive(true);
-            MyLib.MyPlayOneSound("SE/Gameover", 0.3f, se); 
+            MyLib.MyPlayOneSound("SE/Gameover", volume, se); 
 
         }
 

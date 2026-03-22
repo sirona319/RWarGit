@@ -21,16 +21,19 @@ public class TurnMgr : MonoBehaviour
     public void ChangeEnemyTurn(bool isTurn)
     {
         if(isTurn)turnText.text = "Enemy Turn";
-        //Camera.main.transform.position = new Vector3(0, Camera.main.transform.position.y, 0);
+
         isEnemyTurn = isTurn;
         et.gameObject.SetActive(isTurn);
     }
-    public void ChangePlayerTurn(bool isTurn)
+    public void ChangePlayerTurn(bool isTurn,float waitTime=0f)
     {
-        if (isTurn) turnText.text = "Player Turn";
+        StartCoroutine(MyLib.DelayCoroutine(waitTime, () =>
+        {
+            if (isTurn) turnText.text = "Player Turn";
+            isPlayerTurn = isTurn;
+        }));
 
-        //Camera.main.transform.position = new Vector3(0, Camera.main.transform.position.y, 0);
-        isPlayerTurn = isTurn;
+
     }
     public void ChangeReTurn(bool isTurn)
     {
@@ -42,7 +45,8 @@ public class TurnMgr : MonoBehaviour
             return;
         }
 
-        if (GameObject.FindGameObjectsWithTag("Chara") == null || GameObject.FindGameObjectsWithTag("Chara").Length <= 0)
+        if (GameObject.FindGameObjectsWithTag("Chara") == null ||
+            GameObject.FindGameObjectsWithTag("Chara").Length <= 0)
         {
             //ゲーム終了　負け
             GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(false);
