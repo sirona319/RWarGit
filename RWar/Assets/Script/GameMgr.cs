@@ -24,12 +24,12 @@ public class GameMgr : MonoBehaviour
         if (isVic)
         {
             vic.gameObject.SetActive(true);
-            MyLib.MyPlayOneSound("SE/Gameover", 0.3f, se);
+            MyLib.MyPlayOneSound("SE/victory", 0.3f, se);
         }
         else
         {
             lose.gameObject.SetActive(true);
-            MyLib.MyPlayOneSound("SE/victory", 0.3f, se);
+            MyLib.MyPlayOneSound("SE/Gameover", 0.3f, se); 
 
         }
 
