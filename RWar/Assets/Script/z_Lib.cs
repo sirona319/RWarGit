@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public static class Lib
+public static class z_Lib
 {
 
     public static bool RanKUp(ref string rank)

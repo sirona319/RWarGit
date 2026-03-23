@@ -57,10 +57,10 @@ public class Sup : MonoBehaviour
                 var randHit = Random.Range(0, chs.Length);
                 var atkRank = chs[randHit].GetComponent<CharaParam>().atkRank;
 
-                bool succes = Lib.RanKUp(ref chs[randHit].GetComponent<CharaParam>().atkRank);
+                bool succes = z_Lib.RanKUp(ref chs[randHit].GetComponent<CharaParam>().atkRank);
                 if (!succes)
                 {
-                    succes= Lib.RanKUp(ref chs[randHit].GetComponent<CharaParam>().defRank);
+                    succes= z_Lib.RanKUp(ref chs[randHit].GetComponent<CharaParam>().defRank);
 
                     if(!succes)
                         return;
@@ -87,10 +87,10 @@ public class Sup : MonoBehaviour
                 var ens = GameObject.FindGameObjectsWithTag("Enemy");
                 var randHit = Random.Range(0, ens.Length);
 
-                bool succes = Lib.RanKDown(ref ens[randHit].GetComponent<CharaParam>().atkRank);
+                bool succes = z_Lib.RanKDown(ref ens[randHit].GetComponent<CharaParam>().atkRank);
                 if(!succes)
                 {
-                    succes = Lib.RanKDown(ref ens[randHit].GetComponent<CharaParam>().defRank);
+                    succes = z_Lib.RanKDown(ref ens[randHit].GetComponent<CharaParam>().defRank);
 
                     if (!succes)
                         return;
@@ -121,9 +121,7 @@ public class Sup : MonoBehaviour
 
                 foreach (var e in ens)
                 {
-                    Instantiate(particleMgr.downPt,
-                    e.transform.position,
-                    Quaternion.identity);
+                    Instantiate(particleMgr.downPt,e.transform.position,Quaternion.identity);
                 }
 
             }));

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MEMO : MonoBehaviour
+public class メモ : MonoBehaviour
 {
 
     [TextArea(3, 20)]
@@ -60,7 +60,13 @@ public class MEMO : MonoBehaviour
 
 
 
-
+            ////EventSystemの存在: ヒエラルキー上に「EventSystem」オブジェクトが必要
+        ////Raycast対象の設定: スクリプトをアタッチしているオブジェクトにGraphic（ImageやTextなど）があり、
+        ////Raycast Targetがオンになっている必要があります。
+        //var clickEvent = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
+        //clickEvent.callback.AddListener((eventData) => { Debug.Log("test"); });
+        //var trigger = GetComponent<EventTrigger>();
+        //trigger.triggers.Add(clickEvent);
 
 
 
@@ -81,6 +87,14 @@ public class MEMO : MonoBehaviour
             rotationSpeed * Time.deltaTime
         );
     }
+
+
+
+
+        const float ROLLSPEED = 7f;
+        var rot = Quaternion.AngleAxis(ROLLSPEED, Vector3.right);
+
+        transform.rotation = transform.rotation * rot;
     */
 
 

@@ -2,7 +2,6 @@
 
 public class AllCompCtr : MonoBehaviour
 {
-    bool isTest = false;
 
     private void Update()
     {

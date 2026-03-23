@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-public class CameraCtr : MonoBehaviour
+public class CameraScr : MonoBehaviour
 {
     public bool isEventCamera = false;
     //Transform eventCameraTarget;

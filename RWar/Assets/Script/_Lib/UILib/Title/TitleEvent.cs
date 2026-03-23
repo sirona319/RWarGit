@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using TMPro;
+using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,7 +11,7 @@ public class TitleEvent : MonoBehaviour
 {
    // [SerializeField] private GameMgr.SceneNameType sceneName;
 
-    [SerializeField] private TextMeshProUGUI textMeshPro;
+   // [SerializeField] private TextMeshProUGUI textMeshPro;
 
     //[SerializeField] private Image img;
 
@@ -33,8 +34,8 @@ public class TitleEvent : MonoBehaviour
 
         //img = img != null ? img : GetComponent<Image>();
 
-        if (textMeshPro == null)
-            textMeshPro = GetComponent<TextMeshProUGUI>();
+        //if (textMeshPro == null)
+        //    textMeshPro = GetComponent<TextMeshProUGUI>();
 
         //if (img == null)
         //    img = GetComponent<Image>();
@@ -56,20 +57,24 @@ public class TitleEvent : MonoBehaviour
         //    imgEndColor.a = 64;
         //}
 
+        //EventSystemの存在: ヒエラルキー上に「EventSystem」オブジェクトが必要
+        //Raycast対象の設定: スクリプトをアタッチしているオブジェクトにGraphic（ImageやTextなど）があり、
+        //Raycast Targetがオンになっている必要があります。
+        //var clickEvent = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
+        //clickEvent.callback.AddListener((eventData) => { Debug.Log("test"); });
+        //var trigger = GetComponent<EventTrigger>();
+        //trigger.triggers.Add(clickEvent);
 
-        var clickEvent = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
-       // var enterEvent = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
-       // //var exitEvent = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
+        // var enterEvent = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
+        // //var exitEvent = new EventTrigger.Entry { eventID = EventTriggerType.PointerExit };
 
-       // clickEvent.callback.AddListener((eventData) => { GameMgr.I.SceneChangeUseSoundTitle(sceneName.ToString()); });
         //clickEvent.callback.AddListener((eventData) => { TitleControl.I.MoveSelect(); });
         // enterEvent.callback.AddListener((eventData) => { PointerEnter(); });
         // exitEvent.callback.AddListener((eventData) => { PointerExit();});
 
-        var trigger = GetComponent<EventTrigger>();
-        trigger.triggers.Add(clickEvent);
-       // trigger.triggers.Add(enterEvent);
-       // trigger.triggers.Add(exitEvent);
+
+        // trigger.triggers.Add(enterEvent);
+        // trigger.triggers.Add(exitEvent);
     }
 
     // Update is called once per frame

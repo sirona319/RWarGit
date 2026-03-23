@@ -3,37 +3,13 @@ using UnityEngine;
 
 public class TargetRot : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    //void Update()
-    //{
-    //    const float duration = 1f;
-    //    transform.DORotate(Vector3.forward, duration, RotateMode.LocalAxisAdd);
-    //}
-
-    float targetZAngle = 180f; // 目標のZ角度
-    float rotationSpeed = 300f; // 回転速度 (度/秒)
-
-
+    [SerializeField] float targetZAngle = 180f; // 目標のZ角度
+    [SerializeField] float rotationSpeed = 300f; // 回転速度 (度/秒)
 
     [SerializeField] bool isUp = true;
-    public void SetUp()
-    {
-        isUp = true;
-        isDown = false;
-    }
-    public void SetDown()
-    {
-        isUp = false;
-        isDown = true;
-    }
-
     [SerializeField] bool isDown = false;
+
     void Update()
     {
         if(isDown)
@@ -45,6 +21,18 @@ public class TargetRot : MonoBehaviour
             Rot();
         }
 
+    }
+
+    public void SetUp()
+    {
+        isUp = true;
+        isDown = false;
+    }
+
+    public void SetDown()
+    {
+        isUp = false;
+        isDown = true;
     }
 
     void Rot()

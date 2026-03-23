@@ -9,6 +9,7 @@ public class ParticleMgr : MonoBehaviour
     public GameObject atkFirePt;
 
     public GameObject healPt;
+
     public GameObject downPt;
 
     public GameObject buffPt;
@@ -29,16 +30,11 @@ public class ParticleMgr : MonoBehaviour
         atkPt = (GameObject)Resources.Load("prefab/Particle/CFXR4 Sword Hit PLAIN (Cross)");
 
         buffPt = (GameObject)Resources.Load("prefab/Particle/CFXR Impact Glowing HDR (Blue)");
+
         debuffPt = (GameObject)Resources.Load("prefab/Particle/CFXR4 Bouncing Glows Bubble (Blue Purple)");
-        //debuffPt = (GameObject)Resources.Load("prefab/Particle/CFXR2 _CURSED_");
-        //CFXR4 Bouncing Glows Bubble (Blue Purple)
+
         atkFirePt = (GameObject)Resources.Load("prefab/Particle/CFXR3 Hit Fire B (Air)");
-        //CFXR3 Hit Fire B (Air)
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

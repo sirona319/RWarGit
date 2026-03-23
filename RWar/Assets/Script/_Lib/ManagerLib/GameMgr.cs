@@ -7,8 +7,6 @@ public class GameMgr : MonoBehaviour
 
     [SerializeField] TMP_Text lose;
 
-    //[SerializeField] float gameEndTime = 1f;
-
     [SerializeField] float fadeStartTime = 2f;
     [SerializeField] float fadeEndTime = 3f;
 
@@ -16,6 +14,14 @@ public class GameMgr : MonoBehaviour
 
     bool isCallEnd = false;
 
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            GameEnd(true);
+        }
+    }
     public void GameEnd(bool isVic)
     {
         if (isCallEnd) return;
@@ -34,9 +40,9 @@ public class GameMgr : MonoBehaviour
 
         }
         const float time = 1.5f;
-        GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().fadeWaitTime = time;
-        GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().SceneFade
-            (SceneName.ToString(), fadeStartTime, fadeEndTime);
+        var fade = GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>();
+        fade.fadeWaitTime = time;
+        fade.SceneFade(SceneName.ToString(), fadeStartTime, fadeEndTime);
 
         isCallEnd = true;
     }

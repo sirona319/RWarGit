@@ -7,12 +7,7 @@ public class TitleStart : MonoBehaviour
     [SerializeField] string BottuonNameTwo;
     [SerializeField] string BottuonNameThree;
 
-
-    //[SerializeField] EnumSceneName.SceneNameType sceneNameOne;
-
     bool isSelect = false;
-
-    //float fadeTime = 1f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,8 +18,8 @@ public class TitleStart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().fadeWaitTime -= Time.deltaTime;
-        if (GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().fadeWaitTime > 0) return;
+        var time = GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().fadeWaitTime -= Time.deltaTime;
+        if (time > 0) return;
 
         const int LEFT = 0;
         if (!Input.GetMouseButtonDown(LEFT)) return;
@@ -34,21 +29,19 @@ public class TitleStart : MonoBehaviour
 
         if(selectObj==null) return;
 
+        //ボタンを押したとき遷移
         if (selectObj.gameObject.name == BottuonNameOne)
         {
-            //遷移
             SelectStart();
         }
 
-        if (selectObj.gameObject.name == BottuonNameTwo)
+        else if (selectObj.gameObject.name == BottuonNameTwo)
         {
-            //遷移
             SelectStart2();
         }
 
-        if (selectObj.gameObject.name == BottuonNameThree)
+        else if (selectObj.gameObject.name == BottuonNameThree)
         {
-            //遷移
             SelectStart3();
         }
 
