@@ -8,7 +8,7 @@ public class SupTurn : MonoBehaviour
 
     [SerializeField] TurnMgr turnMgr;
 
-    const float turnChangeTime = 0.8f;
+    const float turnChangeTime = 2f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

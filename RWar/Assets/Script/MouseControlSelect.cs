@@ -189,11 +189,23 @@ public class MouseControlSelect : MonoBehaviour
 
             select.GetComponent<CharaParam>().hp-= damageVal;
 
-            Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkPt,
-              select.transform.position,
-              Quaternion.identity);
 
-            MyLib.MyPlayOneSound("SE/重いパンチ3", 1f, gameObject);
+            //きゃらごとの攻撃エフェクト
+            if(selectObj.GetComponent<CharaParam>().charaName== "MGC")
+            {
+                Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkFirePt,
+                  select.transform.position,
+                  Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkPt,
+                  select.transform.position,
+                  Quaternion.identity);
+            }
+
+
+                MyLib.MyPlayOneSound("SE/重いパンチ3", 1f, gameObject);
 
             if (select.GetComponent<CharaParam>().hp<=0)
                 select.GetComponent<TimeDestroy>().SetTime();
@@ -320,6 +332,7 @@ public class MouseControlSelect : MonoBehaviour
 
         if (selectObj != null)
         {
+            if(selectObj.GetComponent<RotModule>()!=null)
             selectObj.GetComponent<RotModule>().speed = 0;
 
             selectObj.transform.position = savePos;

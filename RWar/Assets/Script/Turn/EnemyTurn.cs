@@ -108,9 +108,22 @@ public class EnemyTurn : MonoBehaviour
             tcParam.GetComponent<CharaParam>().doChangeHpUI.DamegeView(enParam.GetAtkRandVal());
             tcParam.hp -= damageVal;
 
-            Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkPt,
-              tcParam.transform.position,
-              Quaternion.identity);
+
+            //きゃらごとの攻撃エフェクト
+            if(enParam.charaName=="Dragon")
+            {
+                Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkFirePt,
+                tcParam.transform.position,
+                Quaternion.identity);
+            }
+            else
+            {
+                Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkPt,
+                  tcParam.transform.position,
+                  Quaternion.identity);
+
+            }
+
 
             var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
             var volume = 1f;

@@ -43,13 +43,13 @@ public class CharaParam : CharaBase
     {
 
         float val = 0;
-        if (moveRank == "S")
+        if (atkLengeRank == "S")
             val = 4;
-        else if (moveRank == "A")
+        else if (atkLengeRank == "A")
             val = 3;
-        else if (moveRank == "B")
+        else if (atkLengeRank == "B")
             val = 2;
-        else if (moveRank == "C")
+        else if (atkLengeRank == "C")
             val = 1f;
         else
             Debug.Log("ランクエラー　:");

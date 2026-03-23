@@ -33,7 +33,8 @@ public class GameMgr : MonoBehaviour
             MyLib.MyPlayOneSound("SE/Gameover", volume, se); 
 
         }
-
+        const float time = 1.5f;
+        GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().fadeWaitTime = time;
         GameObject.FindGameObjectWithTag("Fade").GetComponent<FadeScene>().SceneFade
             (SceneName.ToString(), fadeStartTime, fadeEndTime);
 

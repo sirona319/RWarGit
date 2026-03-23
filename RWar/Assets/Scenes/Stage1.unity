@@ -7693,6 +7693,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ParticleMgr
   deadPt: {fileID: 9157105887711914197, guid: c4f829cb7dd4b864caf8832ec5b1ee55, type: 3}
   atkPt: {fileID: 8525990746615576120, guid: b85d21f3b8fed714bacf0c4fd50fa512, type: 3}
+  atkFirePt: {fileID: 0}
   healPt: {fileID: 0}
   downPt: {fileID: 0}
   buffPt: {fileID: 0}

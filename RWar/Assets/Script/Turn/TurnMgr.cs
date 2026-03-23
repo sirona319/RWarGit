@@ -25,6 +25,15 @@ public class TurnMgr : MonoBehaviour
         isEnemyTurn = isTurn;
         et.gameObject.SetActive(isTurn);
     }
+    public void ChangePlayerTurn(bool isTurn)
+    {
+        //StartCoroutine(MyLib.DelayCoroutine(waitTime, () =>
+        //{
+            if (isTurn) turnText.text = "Player Turn";
+            isPlayerTurn = isTurn;
+        //}));
+
+    }
     public void ChangePlayerTurn(bool isTurn,float waitTime=0f)
     {
         StartCoroutine(MyLib.DelayCoroutine(waitTime, () =>
@@ -32,7 +41,6 @@ public class TurnMgr : MonoBehaviour
             if (isTurn) turnText.text = "Player Turn";
             isPlayerTurn = isTurn;
         }));
-
 
     }
     public void ChangeReTurn(bool isTurn)

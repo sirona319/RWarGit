@@ -32,6 +32,8 @@ public class FadeScene : MonoBehaviour
 
     IFade fade;
 
+    public float fadeWaitTime = 0;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
