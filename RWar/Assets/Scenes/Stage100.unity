@@ -298,7 +298,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4724334576784176903, guid: f7140c46c98d1984f8c47e4571b2e22b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9166484419921645206, guid: f7140c46c98d1984f8c47e4571b2e22b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -523,10 +523,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MGC
       objectReference: {fileID: 0}
-    - target: {fileID: 3642175795596812167, guid: d1f5711f65428c34ab5a6d81f4a87160, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -622,7 +618,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5038194880456239091, guid: dd5466d34d682294bb9b2cae0c625cfd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1665,10 +1661,6 @@ PrefabInstance:
     - target: {fileID: 2132176351625505726, guid: 42ac8d178a0b6ec42a4447934d4d6511, type: 3}
       propertyPath: m_Name
       value: Axe
-      objectReference: {fileID: 0}
-    - target: {fileID: 2132176351625505726, guid: 42ac8d178a0b6ec42a4447934d4d6511, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2365836278533136323, guid: 42ac8d178a0b6ec42a4447934d4d6511, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5194,11 +5186,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 205400246}
+  - {fileID: 138584448}
   - {fileID: 1573578393}
   - {fileID: 1442905460}
   - {fileID: 705275056}
-  - {fileID: 205400246}
-  - {fileID: 138584448}
   - {fileID: 543134864}
   - {fileID: 159490223}
   - {fileID: 2111304371}

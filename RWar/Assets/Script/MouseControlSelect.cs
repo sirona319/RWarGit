@@ -4,7 +4,7 @@ using UnityEngine;
 //using UnityEngine.InputSystem; ProjectSetting→Player→OtherSettings→ActiveInputHandlingをInputSystemPackageにする必要がある
 public class MouseControlSelect : MonoBehaviour
 {
-    GameObject selectObj;
+    GameObject selectObjFirst;
 
     const int LEFT = 0;
     const int RIGHT = 1;
@@ -22,18 +22,15 @@ public class MouseControlSelect : MonoBehaviour
 
     [SerializeField] float ereaY=-0.8f;
     [SerializeField]GameObject moveEreaGo;
-    //[SerializeField] bool isMoveEreaEnable = false;
 
     [SerializeField] GameObject atkEreaGo;
-    //[SerializeField] bool isAtkEreaEnable = false;
 
     [SerializeField] bool isMoveEnd = false;
 
     [SerializeField] TurnMgr turnMgr;
 
-    GameObject atkEreaGoSaveEnemy;
-    GameObject atkEreaGoSave;
-    GameObject moveEreaGoSave;
+    CharaParam atkEreaGoSaveEnemy;
+
     void Start()
     {
         charaUI = GameObject.FindGameObjectWithTag("CharaUI").GetComponent<CharaUI>();
@@ -76,37 +73,36 @@ public class MouseControlSelect : MonoBehaviour
             GameObject.FindGameObjectWithTag("GameMgr").GetComponent<GameMgr>().GameEnd(false);
             return;
         }
-        selectObj = MyLib.DebugRayViewCameraPosZ();
 
-        //var createPos = MyLib.DebugRayViewCameraPosXZ();
+        selectObjFirst = MyLib.DebugRayViewCameraPosZ();
         charaUI.CharaSelectOff();
 
 
-        if (selectObj == null) return;
+        if (selectObjFirst == null) return;
         
 
-        if (selectObj.isStatic)
+        if (selectObjFirst.isStatic)
         {
-            selectObj = null;
+            selectObjFirst = null;
             return;
         }
 
-        savePos = selectObj.transform.position;
+        savePos = selectObjFirst.transform.position;
 
-        if (selectObj.tag == "Enemy")
+        if (selectObjFirst.tag == "Enemy")
         {
             charaUI.EnemySelectOn();
-            Destroy(atkEreaGoSaveEnemy);
-            atkEreaGoSaveEnemy =Instantiate(
-                selectObj.GetComponent<CharaParam>().playerLengeGoAtk,
-                new Vector3(selectObj.transform.position.x, ereaY, selectObj.transform.position.z),
-                Quaternion.identity);
 
-            //パラメーター　取得
+            if(atkEreaGoSaveEnemy!=null)
+                atkEreaGoSaveEnemy.playerLengeGoAtk.SetActive(false);
+
+            selectObjFirst.GetComponent<CharaParam>().playerLengeGoAtk.SetActive(true);
+            atkEreaGoSaveEnemy = selectObjFirst.GetComponent<CharaParam>();
+
 
             SetMobUI();
         }
-        else if (selectObj.tag == "Chara")
+        else if (selectObjFirst.tag == "Chara")
         {
             charaUI.CharaSelectOn();
             isCharaSelect = true;
@@ -117,10 +113,10 @@ public class MouseControlSelect : MonoBehaviour
 
             SetMobUI();
 
-            selectObj.GetComponent<RotModule>().speed = 20;
+            selectObjFirst.GetComponent<RotModule>().speed = 20;
         }
 
-        else if (selectObj.tag == "MoveErea")
+        else if (selectObjFirst.tag == "MoveErea")
         {
             return;
         }
@@ -131,16 +127,15 @@ public class MouseControlSelect : MonoBehaviour
 
     }
 
+    //パラメーター　取得
 
     void SetMobUI()
     {
-        //パラメーター　取得
-
-        charaUI.charaText.text = selectObj.GetComponent<CharaParam>().charaName;
-        charaUI.hpText.text = selectObj.GetComponent<CharaParam>().hp.ToString();
-        charaUI.atkText.text = selectObj.GetComponent<CharaParam>().atkRank;
-        charaUI.defText.text = selectObj.GetComponent<CharaParam>().defRank;
-        charaUI.moveText.text = selectObj.GetComponent<CharaParam>().moveRank;
+        charaUI.charaText.text = selectObjFirst.GetComponent<CharaParam>().charaName;
+        charaUI.hpText.text = selectObjFirst.GetComponent<CharaParam>().hp.ToString();
+        charaUI.atkText.text = selectObjFirst.GetComponent<CharaParam>().atkRank;
+        charaUI.defText.text = selectObjFirst.GetComponent<CharaParam>().defRank;
+        charaUI.moveText.text = selectObjFirst.GetComponent<CharaParam>().moveRank;
     }
 
 
@@ -157,7 +152,7 @@ public class MouseControlSelect : MonoBehaviour
         if (select == null) return;
 
 
-        if (select.isStatic/*||selectObj.tag=="Untagged"*/)
+        if (select.isStatic/*||selectObjFirst.tag=="Untagged"*/)
         {
             select = null;
             return;
@@ -165,10 +160,10 @@ public class MouseControlSelect : MonoBehaviour
         else if (select.tag == "MoveErea")
         {
             if (isMoveEnd) return;
-            selectObj.transform.position = MyLib.DebugRayViewCameraPosXZ();
+            selectObjFirst.transform.position = MyLib.DebugRayViewCameraPosXZ();
             GameObject.FindGameObjectsWithTag("MoveErea").ToList().ForEach(x => x.SetActive(false));
             isMoveEnd = true;
-            //selectObj.GetComponent<RotModule>().enabled = false;
+            //selectObjFirst.GetComponent<RotModule>().enabled = false;
             return;
 
         }
@@ -176,14 +171,15 @@ public class MouseControlSelect : MonoBehaviour
         {
             //AtkEreaの範囲に入っている敵のみ選択可能にする
             if(!select.GetComponent<CharaParam>().isAtkTarget)return;
-            
-
-            Debug.Log(select.name+"攻撃した＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿");
+            Debug.Log(select.name+"攻撃した＿");
+            GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach
+                        (x => x.GetComponent<CharaParam>().isAtkTarget = false);
+            selectObjFirst.GetComponent<CharaParam>().playerLengeGoAtk.SetActive(false);
 
             select.GetComponent<ShakeOnceModule>().enabled = true;
 
             //敵のHP　減少　死亡処理など
-            var damageVal = selectObj.GetComponent<CharaParam>().GetAtkRandVal();
+            var damageVal = selectObjFirst.GetComponent<CharaParam>().GetAtkRandVal();
 
             select.GetComponent<CharaParam>().doChangeHpUI.DamegeView(damageVal);
 
@@ -191,7 +187,7 @@ public class MouseControlSelect : MonoBehaviour
 
 
             //きゃらごとの攻撃エフェクト
-            if(selectObj.GetComponent<CharaParam>().charaName== "MGC")
+            if(selectObjFirst.GetComponent<CharaParam>().charaName== "MGC")
             {
                 Instantiate(GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>().atkFirePt,
                   select.transform.position,
@@ -214,9 +210,9 @@ public class MouseControlSelect : MonoBehaviour
             //攻撃可能なら攻撃する　複数なら選択　攻撃後強制終了　ターン
             charaUI.CharaSelectOff();
             isCharaSelect = false;
-            selectObj.GetComponent<RotModule>().speed = 0;
+            selectObjFirst.GetComponent<RotModule>().speed = 0;
 
-            selectObj = null;
+ 
             isMoveEnd = false;
             turnMgr.isPlayerTurn = false;
 
@@ -229,14 +225,8 @@ public class MouseControlSelect : MonoBehaviour
 
             }));
 
-            GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach
-                (x => x.GetComponent<CharaParam>().isAtkTarget = false);
-            GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
-            //isAtkEreaEnable = false;
 
-            //isMoveEreaEnable = false;
-            Destroy(moveEreaGoSave);
-            Destroy(atkEreaGoSave);
+            selectObjFirst = null;
 
             return;
    
@@ -248,47 +238,27 @@ public class MouseControlSelect : MonoBehaviour
     public void SetMoveEreaGo()
     {
         if (!turnMgr.isPlayerTurn) return;
-        //if (isMoveEreaEnable) return;
-        if(selectObj==null) return;
-        GameObject.FindGameObjectsWithTag("AtkErea").ToList().ForEach(x => x.SetActive(false));
-        //isAtkEreaEnable = false;
-        if(moveEreaGoSave!=null)
-        {
-            return;
-        }
-        Destroy(atkEreaGoSave);
-        //Debug.Log(atkEreaGoSave);
-        //atkEreaGoSave = null;
+        if(selectObjFirst==null) return;
+        selectObjFirst.GetComponent<CharaParam>().playerLengeGoAtk.SetActive(false);
 
-        moveEreaGoSave =Instantiate(
-            selectObj.GetComponent<CharaParam>().playerLengeGoMove,
-            new Vector3(selectObj.transform.position.x, ereaY, selectObj.transform.position.z),
-            Quaternion.identity);
+        GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => { x.GetComponent<CharaParam>().isAtkTarget = false; });
 
-        //isMoveEreaEnable = true;
+
+        selectObjFirst.GetComponent<CharaParam>().playerLengeGoMove.SetActive(true);
+
+
     }
 
     public void SetAtkEreaGo()
     {
         if (!turnMgr.isPlayerTurn) return;
-        //if (isAtkEreaEnable) return;
-        if (selectObj == null) return;
-        GameObject.FindGameObjectsWithTag("MoveErea").ToList().ForEach(x => x.SetActive(false));
-        //isMoveEreaEnable = false;
+        if (selectObjFirst == null) return;
 
-        if (atkEreaGoSave != null)
-        {
-            return;
-        }
 
-        Destroy(moveEreaGoSave);
-        //selectObj.GetComponent<CharaParam>().playerLengeGoAtk.SetActive(true);
-        atkEreaGoSave = Instantiate(
-            selectObj.GetComponent<CharaParam>().playerLengeGoAtk,
-            new Vector3(selectObj.transform.position.x, ereaY, selectObj.transform.position.z),
-            Quaternion.identity);
+        selectObjFirst.GetComponent<CharaParam>().playerLengeGoMove.SetActive(false);
 
-        //isAtkEreaEnable = true;
+        selectObjFirst.GetComponent<CharaParam>().playerLengeGoAtk.SetActive(true);
+
     }
 
     public void TurnEndBottun()
@@ -298,18 +268,26 @@ public class MouseControlSelect : MonoBehaviour
 
         charaUI.CharaSelectOff();
 
-        if (selectObj != null)
+        if (atkEreaGoSaveEnemy != null)
+            atkEreaGoSaveEnemy.playerLengeGoAtk.SetActive(false);
+
+        if (selectObjFirst != null)
         {
-            selectObj.GetComponent<RotModule>().speed = 0;
+            if (selectObjFirst.GetComponent<RotModule>() != null)
+                selectObjFirst.GetComponent<RotModule>().speed = 0;
 
-            selectObj = null;
+            if (selectObjFirst.tag == "Chara")
+                selectObjFirst.GetComponent<CharaParam>().playerLengeGoMove.SetActive(false);
+
+            selectObjFirst.GetComponent<CharaParam>().playerLengeGoAtk.SetActive(false);
+            GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => { x.GetComponent<CharaParam>().isAtkTarget = false; });
+
+            //selectObjFirst.transform.position = savePos;
+            selectObjFirst = null;
         }
+        //Destroy(moveEreaGoSave);
+        //Destroy(atkEreaGoSave);
 
-        Destroy(moveEreaGoSave);
-        Destroy(atkEreaGoSave);
-
-        //isMoveEreaEnable = false;
-        //isAtkEreaEnable = false;
         isMoveEnd = false;
         GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach
             (x => x.GetComponent<CharaParam>().isAtkTarget = false);
@@ -330,16 +308,25 @@ public class MouseControlSelect : MonoBehaviour
 
         charaUI.CharaSelectOff();
 
-        if (selectObj != null)
-        {
-            if(selectObj.GetComponent<RotModule>()!=null)
-            selectObj.GetComponent<RotModule>().speed = 0;
+        if(atkEreaGoSaveEnemy!=null)
+            atkEreaGoSaveEnemy.playerLengeGoAtk.SetActive(false);
 
-            selectObj.transform.position = savePos;
-            selectObj = null;
+        if (selectObjFirst != null)
+        {
+            if(selectObjFirst.GetComponent<RotModule>()!=null)
+            selectObjFirst.GetComponent<RotModule>().speed = 0;
+
+            if(selectObjFirst.tag=="Chara")
+            selectObjFirst.GetComponent<CharaParam>().playerLengeGoMove.SetActive(false);
+
+            selectObjFirst.GetComponent<CharaParam>().playerLengeGoAtk.SetActive(false);
+            GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach(x => { x.GetComponent<CharaParam>().isAtkTarget = false; });
+
+            selectObjFirst.transform.position = savePos;
+            selectObjFirst = null;
         }
-        Destroy(moveEreaGoSave);
-        Destroy(atkEreaGoSave);
+        //Destroy(moveEreaGoSave);
+        //Destroy(atkEreaGoSave);
 
         isMoveEnd = false;
         GameObject.FindGameObjectsWithTag("Enemy").ToList().ForEach

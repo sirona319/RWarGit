@@ -296,10 +296,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bow
       objectReference: {fileID: 0}
-    - target: {fileID: 4724334576784176903, guid: f7140c46c98d1984f8c47e4571b2e22b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 9166484419921645206, guid: f7140c46c98d1984f8c47e4571b2e22b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.65
@@ -615,10 +611,6 @@ PrefabInstance:
     - target: {fileID: 5038194880456239091, guid: dd5466d34d682294bb9b2cae0c625cfd, type: 3}
       propertyPath: m_Name
       value: DEF
-      objectReference: {fileID: 0}
-    - target: {fileID: 5038194880456239091, guid: dd5466d34d682294bb9b2cae0c625cfd, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1650,14 +1642,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1507370131}
     m_Modifications:
-    - target: {fileID: 723362976413750547, guid: 42ac8d178a0b6ec42a4447934d4d6511, type: 3}
-      propertyPath: playerLengeGoAtk
-      value: 
-      objectReference: {fileID: 8290104504260334715, guid: 1ee8dbc9352ab9e44bdb489cf2a56d71, type: 3}
-    - target: {fileID: 1295755301087422044, guid: 42ac8d178a0b6ec42a4447934d4d6511, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2132176351625505726, guid: 42ac8d178a0b6ec42a4447934d4d6511, type: 3}
       propertyPath: m_Name
       value: Axe
@@ -5186,12 +5170,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 205400246}
-  - {fileID: 138584448}
   - {fileID: 1573578393}
   - {fileID: 1442905460}
   - {fileID: 705275056}
   - {fileID: 543134864}
+  - {fileID: 205400246}
+  - {fileID: 138584448}
   - {fileID: 159490223}
   - {fileID: 2111304371}
   m_Father: {fileID: 0}
@@ -6730,11 +6714,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5190481938709426573, guid: f48e5d26b0825cc449cf96fde46b9794, type: 3}
       propertyPath: atkRank
-      value: C
+      value: B
       objectReference: {fileID: 0}
     - target: {fileID: 5190481938709426573, guid: f48e5d26b0825cc449cf96fde46b9794, type: 3}
       propertyPath: defRank
-      value: C
+      value: B
       objectReference: {fileID: 0}
     - target: {fileID: 6248554046546187307, guid: f48e5d26b0825cc449cf96fde46b9794, type: 3}
       propertyPath: m_LocalPosition.x
