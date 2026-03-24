@@ -17,10 +17,10 @@ public class GameMgr : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            GameEnd(true);
-        }
+        //if (Input.GetKeyDown(KeyCode.Backspace))
+        //{
+        //    GameEnd(true);
+        //}
     }
     public void GameEnd(bool isVic)
     {

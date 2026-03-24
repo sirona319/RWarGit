@@ -15,7 +15,7 @@ public static class MyLib
     #region デバッグ
     public static void DebugInfo(GameObject go)
     {
-        Debug.Log(go.name + " " + go.tag + " " + go.layer+ "\n"+ go.GetType().FullName);
+        Debug.Log(go.name + " " + go.tag + " " + go.layer + "\n" + go.GetType().FullName);
     }
     #endregion
 
@@ -27,11 +27,11 @@ public static class MyLib
     //    addSinTime = -Time.deltaTime;
 
     //上下　浮遊のような動き
-    public static void LoopMotionSinWait(float sinTime,Transform t,float addX,float addY)
+    public static void LoopMotionSinWait(float sinTime, Transform t, float addX, float addY)
     {
         //float sin = Mathf.Sin(Time.time);
         float sin = Mathf.Sin(sinTime);
-        t.position = new Vector3(t.position.x + (sin * addX), t.position.y+(sin * addY), 0);
+        t.position = new Vector3(t.position.x + (sin * addX), t.position.y + (sin * addY), 0);
     }
 
     //Vector3で移動方向　周期的なカーブ移動
@@ -133,7 +133,7 @@ public static class MyLib
     //    {
     //    MyLib.DoShakeUpdate2D(power, transform);
     //}));
-    public static void DoShakeUpdate2D(float magnitude, Transform trans,float zPos=0f)
+    public static void DoShakeUpdate2D(float magnitude, Transform trans, float zPos = 0f)
     {
 
         var pos = trans.localPosition;
@@ -162,7 +162,7 @@ public static class MyLib
 
     }
 
-    public static Quaternion TargetRotation(Vector3 targetPos, Transform myTrans, float interpolant,Vector3 axis)
+    public static Quaternion TargetRotation(Vector3 targetPos, Transform myTrans, float interpolant, Vector3 axis)
     {
         //方向を向く回転の処理
         var dir = targetPos - myTrans.position;
@@ -240,7 +240,7 @@ public static class MyLib
         return velocity;
     }
 
-    public static Quaternion TargetRotation2DZOnlyLerp(Transform myTrans,Vector2 velocity, float rotSpeed)
+    public static Quaternion TargetRotation2DZOnlyLerp(Transform myTrans, Vector2 velocity, float rotSpeed)
     {
 
         float zAngle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg - 90.0f;        // 弾の向きを設定する
@@ -270,6 +270,14 @@ public static class MyLib
     #endregion
 
     #region 移動
+
+    public static Vector3 KeepVecY(Vector3 vec, float val)
+    {
+        var Vec= vec;
+        Vec.y = val;
+        return vec = Vec;
+
+    }
 
     //public static Vector3 TargetMoveNormalized(Vector3 target, Vector3 pos)
     //{

@@ -204,8 +204,8 @@ public class MouseControlSelect : MonoBehaviour
                   Quaternion.identity);
             }
 
-
-                MyLib.MyPlayOneSound("SE/重いパンチ3", 1f, gameObject);
+            var se = GameObject.FindGameObjectWithTag("SoundM").GetComponent<SoundManager>().se.gameObject;
+            MyLib.MyPlayOneSound("SE/重いパンチ3", 1f, se);
 
             if (select.GetComponent<CharaParam>().hp<=0)
                 select.GetComponent<TimeDestroy>().SetTime();
@@ -291,7 +291,7 @@ public class MouseControlSelect : MonoBehaviour
         //isAtkEreaEnable = true;
     }
 
-    public void EndBottun()
+    public void TurnEndBottun()
     {
         Debug.Log("ボタンが押された");
         isCharaSelect = false;

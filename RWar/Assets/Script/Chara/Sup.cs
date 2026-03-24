@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TMPro;
 using UnityEngine;
 
 public class Sup : MonoBehaviour
@@ -10,6 +11,8 @@ public class Sup : MonoBehaviour
     ParticleMgr particleMgr;
     GameObject se;
 
+    public TextMeshProUGUI InfoText;
+
     private void Start()
     {
         particleMgr = GameObject.FindGameObjectWithTag("ParticleMgr").GetComponent<ParticleMgr>();
@@ -17,7 +20,9 @@ public class Sup : MonoBehaviour
     }
     public void SupSkill(GameObject go)
     {
-        if(supName=="none")
+        InfoText.enabled = false;
+
+        if (supName=="none")
         {
             Debug.Log("none");
         }
@@ -63,7 +68,12 @@ public class Sup : MonoBehaviour
                     succes= z_Lib.RanKUp(ref chs[randHit].GetComponent<CharaParam>().defRank);
 
                     if(!succes)
+                    {
+                        InfoText.enabled = true;
+                        InfoText.text="Buff失敗";
                         return;
+
+                    }
                 }
 
 
@@ -93,7 +103,12 @@ public class Sup : MonoBehaviour
                     succes = z_Lib.RanKDown(ref ens[randHit].GetComponent<CharaParam>().defRank);
 
                     if (!succes)
+                    {
+                        InfoText.enabled = true;
+                        InfoText.text = "DeBuff失敗";
                         return;
+
+                    }
                 }
 
 
@@ -101,9 +116,11 @@ public class Sup : MonoBehaviour
 
 
                 Instantiate(particleMgr.debuffPt,
-                ens[randHit].transform.position,
+                new Vector3(ens[randHit].transform.position.x, ens[randHit].transform.position.y+1f, ens[randHit].transform.position.z),
                 Quaternion.identity);
-              
+
+                Debug.Log("Debuff");
+
 
             }));
         }
@@ -121,11 +138,15 @@ public class Sup : MonoBehaviour
 
                 foreach (var e in ens)
                 {
-                    Instantiate(particleMgr.downPt,e.transform.position,Quaternion.identity);
+                    Instantiate(particleMgr.downPt,
+                        new Vector3(e.transform.position.x, e.transform.position.y + 1f, e.transform.position.z),
+                        Quaternion.identity);
                 }
 
             }));
 
         }
+
+
     }
 }

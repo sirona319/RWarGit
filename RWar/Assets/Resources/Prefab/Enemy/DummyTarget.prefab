@@ -162,9 +162,9 @@ MonoBehaviour:
   playerLengeGoAtk: {fileID: 7562396370467831448, guid: ba5b5244ac9317349a627b57703d8f42, type: 3}
   playerLengeGoMove: {fileID: 0}
   charaName: Dummy
-  hp: 30
-  atkRank: C
-  defRank: C
+  hp: 50
+  atkRank: B
+  defRank: B
   moveRank: C
   atkLengeRank: C
   skill: none

@@ -63,7 +63,11 @@ public class EnemyTurn : MonoBehaviour
         var direction = (cPos - enParam.transform.position).normalized;
         var spd = 1f;
         enParam.transform.position += direction * spd * Time.deltaTime;
+        //var vec = enParam.transform.position;
+        //vec.y = sPos.y;
+        //enParam.transform.position = vec;
 
+        enParam.transform.position = MyLib.KeepVecY(enParam.transform.position,sPos.y);
 
 
         float dis = Vector3.Distance(enParam.transform.position, sPos);
